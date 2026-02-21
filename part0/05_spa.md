@@ -21,3 +21,5 @@ sequenceDiagram
   activate server
   server-->>browser: 200 OK; JSON document
   deactivate server
+
+  Note right of browser: The browser executes a callback function to render the notes
