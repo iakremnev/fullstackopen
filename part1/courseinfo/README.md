@@ -7,3 +7,7 @@ Refactor the *App* component by extracting three new components: *Header*, *Cont
 ## Exercise 1.2
 
 Refactor the *Content* component to use *Part* subcomponents to render the actual part content.
+
+## Exercise 1.3
+
+Introduce objects instead of primitive types
