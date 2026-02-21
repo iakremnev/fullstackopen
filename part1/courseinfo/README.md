@@ -15,3 +15,7 @@ Introduce objects instead of primitive types
 ## Exercise 1.4
 
 Place the objects into an array
+
+## Exercise 1.5
+
+Place course and its parts into a sigle object.
