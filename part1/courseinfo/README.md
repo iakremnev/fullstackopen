@@ -11,3 +11,7 @@ Refactor the *Content* component to use *Part* subcomponents to render the actua
 ## Exercise 1.3
 
 Introduce objects instead of primitive types
+
+## Exercise 1.4
+
+Place the objects into an array
