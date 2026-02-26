@@ -15,3 +15,7 @@ Refactor statistics into a separate component
 ## Exercise 1.9
 
 Display statistics only when feeback has been gathered
+
+## Exercise 1.10
+
+Extract `Button` and `StatisticLine` components
