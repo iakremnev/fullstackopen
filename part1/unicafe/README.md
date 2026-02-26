@@ -11,3 +11,7 @@ Show additional statistics: total number of collected feedback, average feedback
 ## Exercise 1.8
 
 Refactor statistics into a separate component
+
+## Exercise 1.9
+
+Display statistics only when feeback has been gathered
