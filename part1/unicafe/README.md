@@ -19,3 +19,7 @@ Display statistics only when feeback has been gathered
 ## Exercise 1.10
 
 Extract `Button` and `StatisticLine` components
+
+## Exercise 1.11
+
+Display the statistics in an HTML table
