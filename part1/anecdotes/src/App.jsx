@@ -2,6 +2,15 @@ import { useState } from 'react'
 
 const getRandomInt = (max) => Math.floor(Math.random() * max)
 
+const Anecdote = ({ text, votes }) => {
+    return (
+        <div>
+            <p> {text}</p>
+            <p>has { votes } votes</p>
+        </div>
+    )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -29,8 +38,7 @@ const App = () => {
     }
   return (
     <div>
-          <p>{anecdotes[selected]}</p>
-          <p>has { votes[selected] } votes</p>
+          <Anecdote text={anecdotes[selected]} votes={votes[selected]} />
           <button onClick={registerVote(selected)}>vote</button>
           <button onClick={selectRandom}>next anecdote</button>
     </div>
