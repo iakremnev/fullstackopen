@@ -11,3 +11,7 @@ Prevent user from adding a name that already exists in the phonebook. Alert the 
 ## Exercise 2.8
 
 Allow adding a phone numbers along with the name
+
+## Exercise 2.9
+
+Implement a search field that can be used to filter the list of people by name
