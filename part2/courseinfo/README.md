@@ -11,3 +11,7 @@ Show the sum of the exercises of the course
 ## Exercise 2.3
 
 Calculate the sum of the exercises with `reduce`
+
+## Exercise 2.4
+
+Support arbitrary number of courses and parts
