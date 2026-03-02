@@ -14,12 +14,20 @@ const App = () => {
     const handleSubmitName = (event) => {
         event.preventDefault()
         console.log('Name submitted:', newName)
-        const newPerson = {
-            name: newName
+
+        const newNameIsValid = persons.find((value) => value.name === newName) === undefined
+        if (newNameIsValid) {
+          const newPerson = {
+              name: newName
+          }
+          const newPersons = persons.concat(newPerson)
+            setPersons(newPersons)
+            setNewName('')
         }
-        const newPersons = persons.concat(newPerson)
-        setPersons(newPersons)
-        setNewName('')
+        else {
+            alert(`${newName} is already added to the phonebook`)
+        }
+
     }
 
   return (
