@@ -15,3 +15,7 @@ Allow adding a phone numbers along with the name
 ## Exercise 2.9
 
 Implement a search field that can be used to filter the list of people by name
+
+## Exercise 2.10
+
+Extract components for the app
