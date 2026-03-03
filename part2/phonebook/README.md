@@ -23,3 +23,7 @@ Extract components for the app
 ## Exercise 2.11
 
 Store app data in *db.json* and serve it with json-server on port 3001
+
+## Exercise 2.12
+
+Save the added records to the database

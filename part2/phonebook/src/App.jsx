@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 import PersonsList from "./Person";
 import Filter from "./Filter";
@@ -31,13 +31,16 @@ const App = () => {
         const newNameIsValid =
             persons.find((value) => value.name === newName) === undefined;
         if (newNameIsValid) {
-            const newPerson = {
-                id: persons.length + 1,
-                name: newName,
-                number: newNumber,
-            };
-            const newPersons = persons.concat(newPerson);
-            setPersons(newPersons);
+            axios
+                .post("http://localhost:3001/persons", {
+                    name: newName,
+                    number: newNumber,
+                })
+                .then((response) => {
+                    const newPerson = response.data;
+                    setPersons(persons.concat(newPerson));
+                });
+
             setNewName("");
             setNewNumber("");
         } else {
@@ -46,13 +49,11 @@ const App = () => {
     };
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                console.log('fetched phonebook')
-                setPersons(response.data)
-            })
-    }, [])
+        axios.get("http://localhost:3001/persons").then((response) => {
+            console.log("fetched phonebook");
+            setPersons(response.data);
+        });
+    }, []);
 
     const personsToShow = persons.filter((person) =>
         person.name.toLowerCase().includes(filterString.toLowerCase()),
