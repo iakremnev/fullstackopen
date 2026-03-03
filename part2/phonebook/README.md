@@ -35,3 +35,7 @@ Extract server communication to a service module
 ## Exercise 2.14
 
 Make possible deletion of records from the phonebook
+
+## Exercise 2.15
+
+Update person's phone

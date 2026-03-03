@@ -28,21 +28,28 @@ const App = () => {
         event.preventDefault();
         console.log("Name submitted:", newName);
 
-        const newNameIsValid =
-            persons.find((value) => value.name === newName) === undefined;
-        if (newNameIsValid) {
-            personService
-                .create({
-                    name: newName,
-                    number: newNumber,
-                })
-                .then((person) => setPersons(persons.concat(person)));
-
-            setNewName("");
-            setNewNumber("");
-        } else {
-            alert(`${newName} is already added to the phonebook`);
+        const newPerson = {
+          name: newName,
+          number: newNumber,
         }
+
+        const existingPerson =
+            persons.find((value) => value.name === newName);
+        if (existingPerson) {
+            if (window.confirm(`${newPerson.name} is already added to the phonebook, replace old number with the new one?`)) {
+              const id = existingPerson.id
+              personService
+                  .update(id, newPerson)
+                  .then(newPerson => setPersons(persons.map(person => person.id === id ? newPerson : person)))
+            }
+        } else {
+          personService
+              .create(newPerson)
+              .then((person) => setPersons(persons.concat(person)));
+        }
+
+        setNewName("");
+        setNewNumber("");
     };
     const handleDeleteOf = (id) => {
         return () => {
