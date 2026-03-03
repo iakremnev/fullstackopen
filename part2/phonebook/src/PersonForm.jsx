@@ -3,15 +3,15 @@ import Button from "./Button";
 
 const PersonForm = ({
     name,
-    phone,
+    number,
     onNameChange,
-    onPhoneChange,
+    onNumberChange,
     onButtonClick,
 }) => {
     return (
         <form>
             <Input label="name:" value={name} onChange={onNameChange} />
-            <Input label="phone:" value={phone} onChange={onPhoneChange} />
+            <Input label="number:" value={number} onChange={onNumberChange} />
             <Button text="add" onClick={onButtonClick} />
         </form>
     );
