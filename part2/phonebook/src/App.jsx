@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
+import personService from "./services/persons";
 import PersonsList from "./Person";
 import Filter from "./Filter";
 import PersonForm from "./PersonForm";
@@ -31,15 +31,12 @@ const App = () => {
         const newNameIsValid =
             persons.find((value) => value.name === newName) === undefined;
         if (newNameIsValid) {
-            axios
-                .post("http://localhost:3001/persons", {
+            personService
+                .create({
                     name: newName,
                     number: newNumber,
                 })
-                .then((response) => {
-                    const newPerson = response.data;
-                    setPersons(persons.concat(newPerson));
-                });
+                .then((person) => setPersons(persons.concat(person)));
 
             setNewName("");
             setNewNumber("");
@@ -49,9 +46,9 @@ const App = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:3001/persons").then((response) => {
+        personService.getAll().then(persons => {
             console.log("fetched phonebook");
-            setPersons(response.data);
+            setPersons(persons);
         });
     }, []);
 

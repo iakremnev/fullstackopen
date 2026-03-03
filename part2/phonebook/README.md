@@ -27,3 +27,7 @@ Store app data in *db.json* and serve it with json-server on port 3001
 ## Exercise 2.12
 
 Save the added records to the database
+
+## Exercise 2.13
+
+Extract server communication to a service module
