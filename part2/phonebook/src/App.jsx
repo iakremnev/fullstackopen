@@ -44,6 +44,17 @@ const App = () => {
             alert(`${newName} is already added to the phonebook`);
         }
     };
+    const handleDeleteOf = (id) => {
+        return () => {
+            personService
+                .remove(id)
+                .then(response => { // response is always empty
+                    console.log(`Deleted personId=${id}`)
+                    const newPersons = persons.filter(person => person.id !== id)
+                    setPersons(newPersons)
+                })
+        }
+    }
 
     useEffect(() => {
         personService.getAll().then(persons => {
@@ -69,7 +80,7 @@ const App = () => {
                 onButtonClick={handleSubmitName}
             />
             <h2>Numbers</h2>
-            <PersonsList persons={personsToShow} />
+            <PersonsList persons={personsToShow} handleDeleteOf={handleDeleteOf}/>
         </div>
     );
 };

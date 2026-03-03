@@ -31,3 +31,7 @@ Save the added records to the database
 ## Exercise 2.13
 
 Extract server communication to a service module
+
+## Exercise 2.14
+
+Make possible deletion of records from the phonebook

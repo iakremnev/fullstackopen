@@ -10,4 +10,9 @@ const create = (person) => {
     return response.then(response => response.data)
 }
 
-export default {getAll, create}
+const remove = (id) => {
+    const response = axios.delete(`http://localhost:3001/persons/${id}`)
+    return response.then(response => response.data)
+}
+
+export default {getAll, create, remove}
