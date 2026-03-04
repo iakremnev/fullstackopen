@@ -11,9 +11,17 @@ const App = () => {
     const [newName, setNewName] = useState("");
     const [newNumber, setNewNumber] = useState("");
     const [filterString, setFilterString] = useState("");
-    const [notificationMessage, setNotificationMessage] = useState(null)
+    const [notification, setNotification] = useState({
+        message: null,
+        color: "#fff",
+    });
 
-    const clearNotification = () => setNotificationMessage(null)
+    const clearNotification = () =>
+        setNotification({ message: null, color: "#fff" });
+    const setNotificationWithTimeout = (notification, timeout) => {
+        setNotification(notification)
+        setTimeout(clearNotification, timeout)
+    }
 
     const handleFilterChange = (event) => {
         console.log("Filter:", event.target.value);
@@ -33,27 +41,49 @@ const App = () => {
         console.log("Name submitted:", newName);
 
         const newPerson = {
-          name: newName,
-          number: newNumber,
-        }
+            name: newName,
+            number: newNumber,
+        };
 
-        const existingPerson =
-            persons.find((value) => value.name === newName);
+        const existingPerson = persons.find((value) => value.name === newName);
         if (existingPerson) {
-            if (window.confirm(`${newPerson.name} is already added to the phonebook, replace old number with the new one?`)) {
-              const id = existingPerson.id
-              personService
-                  .update(id, newPerson)
-                  .then(newPerson => setPersons(persons.map(person => person.id === id ? newPerson : person)))
-                setNotificationMessage(`Updated ${newPerson.name}`)
-                setTimeout(clearNotification, 5000)
+            if (
+                window.confirm(
+                    `${newPerson.name} is already added to the phonebook, replace old number with the new one?`,
+                )
+            ) {
+                const id = existingPerson.id;
+                personService
+                    .update(id, newPerson)
+                    .then((newPerson) => {
+                        setPersons(
+                            persons.map((person) =>
+                                person.id === id ? newPerson : person,
+                            ),
+                        );
+                        setNotificationWithTimeout({
+                            message: `Updated ${newPerson.name}`,
+                            color: "green",
+                        }, 5000);
+                    })
+                    .catch((error) => {
+                        setPersons(
+                            persons.filter((person) => person.id !== id),
+                        );
+                        setNotificationWithTimeout({
+                            message: `Information of ${newPerson.name} has already been removed from server`,
+                            color: "red",
+                        }, 5000);
+                    });
             }
         } else {
-          personService
-              .create(newPerson)
-              .then((person) => setPersons(persons.concat(person)));
-            setNotificationMessage(`Added ${newPerson.name}`)
-            setTimeout(clearNotification, 5000)
+            personService
+                .create(newPerson)
+                .then((person) => setPersons(persons.concat(person)));
+            setNotificationWithTimeout({
+                message: `Added ${newPerson.name}`,
+                color: "green",
+            }, 5000);
         }
 
         setNewName("");
@@ -61,18 +91,17 @@ const App = () => {
     };
     const handleDeleteOf = (id) => {
         return () => {
-            personService
-                .remove(id)
-                .then(response => { // response is always empty
-                    console.log(`Deleted personId=${id}`)
-                    const newPersons = persons.filter(person => person.id !== id)
-                    setPersons(newPersons)
-                })
-        }
-    }
+            personService.remove(id).then((response) => {
+                // response is always empty
+                console.log(`Deleted personId=${id}`);
+                const newPersons = persons.filter((person) => person.id !== id);
+                setPersons(newPersons);
+            });
+        };
+    };
 
     useEffect(() => {
-        personService.getAll().then(persons => {
+        personService.getAll().then((persons) => {
             console.log("fetched phonebook");
             setPersons(persons);
         });
@@ -85,7 +114,7 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
-            <Notification message={notificationMessage} />
+            <Notification message={notification.message} color={notification.color} />
             <Filter value={filterString} onChange={handleFilterChange} />
             <h2>Add a new</h2>
             <PersonForm
@@ -96,7 +125,10 @@ const App = () => {
                 onButtonClick={handleSubmitName}
             />
             <h2>Numbers</h2>
-            <PersonsList persons={personsToShow} handleDeleteOf={handleDeleteOf}/>
+            <PersonsList
+                persons={personsToShow}
+                handleDeleteOf={handleDeleteOf}
+            />
         </div>
     );
 };

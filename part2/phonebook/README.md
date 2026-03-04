@@ -39,3 +39,11 @@ Make possible deletion of records from the phonebook
 ## Exercise 2.15
 
 Update person's phone
+
+## Exercise 2.16
+
+Add few-seconds notification on successfully adding a person to the phonebook
+
+## Exercise 2.17
+
+Handle concurrent delete and update in two browser sessions by showing an error message
