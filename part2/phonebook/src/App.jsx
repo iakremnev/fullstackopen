@@ -4,12 +4,16 @@ import personService from "./services/persons";
 import PersonsList from "./Person";
 import Filter from "./Filter";
 import PersonForm from "./PersonForm";
+import Notification from "./notification";
 
 const App = () => {
     const [persons, setPersons] = useState([]);
     const [newName, setNewName] = useState("");
     const [newNumber, setNewNumber] = useState("");
     const [filterString, setFilterString] = useState("");
+    const [notificationMessage, setNotificationMessage] = useState(null)
+
+    const clearNotification = () => setNotificationMessage(null)
 
     const handleFilterChange = (event) => {
         console.log("Filter:", event.target.value);
@@ -41,11 +45,15 @@ const App = () => {
               personService
                   .update(id, newPerson)
                   .then(newPerson => setPersons(persons.map(person => person.id === id ? newPerson : person)))
+                setNotificationMessage(`Updated ${newPerson.name}`)
+                setTimeout(clearNotification, 5000)
             }
         } else {
           personService
               .create(newPerson)
               .then((person) => setPersons(persons.concat(person)));
+            setNotificationMessage(`Added ${newPerson.name}`)
+            setTimeout(clearNotification, 5000)
         }
 
         setNewName("");
@@ -77,6 +85,7 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
+            <Notification message={notificationMessage} />
             <Filter value={filterString} onChange={handleFilterChange} />
             <h2>Add a new</h2>
             <PersonForm
