@@ -1,23 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-import Filter from './Filter'
-import restcountries from './services/restcountries'
+import Filter from "./Filter";
+import SearchResult from "./SearchResult";
+import restcountries from "./services/restcountries";
+
+const countryMatchesFilter = (country, filterString) => {
+    const countryNameLowerCase = country.name.common.toLowerCase()
+    return countryNameLowerCase.includes(filterString.toLowerCase());
+};
 
 const App = () => {
+    const [filterString, setFilterString] = useState("");
+    const [countries, setCountries] = useState([]);
 
-    const [filterString, setFilterString] = useState("")
-    const [countries, setCountries] = useState([])
+    const handleFilterInput = (event) => setFilterString(event.target.value)
 
-    const handleFilterInput = (event) => {
-        console.log(event.target.value)
-        setFilterString(event.target.value)
-    }
+    useEffect(
+        () => {
+            restcountries.getAll().then((countries) => setCountries(countries))
+        },
+        []
+    );
 
-    useEffect(() => setCountries(restcountries.getAll()), [])
+    const filteredCountries = countries.filter((country) =>
+        countryMatchesFilter(country, filterString),
+    );
+    console.log(`Countries matching filter "${filterString}": ${filteredCountries.length}`)
 
     return (
-        <Filter filterQuery={filterString}  handleInput={handleFilterInput} />
-    )
-}
+        <div>
+            <Filter
+                filterQuery={filterString}
+                handleInput={handleFilterInput}
+            />
+            <SearchResult countries={filteredCountries} />
+        </div>
+    );
+};
 
-export default App
+export default App;
