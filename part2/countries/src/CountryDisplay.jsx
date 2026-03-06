@@ -13,7 +13,7 @@ const CountryDisplay = ({ country }) => {
                 ))}
             </ul>
 
-            <div>{ country.flag }</div>
+            <div><img src={country.flags.png} alt={country.flags.alt} /></div>
         </div>
     )
 }
