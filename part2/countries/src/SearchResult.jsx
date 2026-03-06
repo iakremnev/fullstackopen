@@ -1,4 +1,5 @@
 import CountryList from "./CountryList"
+import CountryDisplay from "./CountryDisplay"
 
 const MAX_DISPLAY_COUNTRIES = 10
 
@@ -10,9 +11,7 @@ const SearchResult = ({ countries }) => {
         return <CountryList countries={countries} />
     }
     if (countries.length === 1) {
-        const countryName = countries[0].name.common
-        const style = {fontStyle: 'italic'}
-      return <div style={style}>Matching single country: {countryName}</div>
+      return <CountryDisplay country={countries[0]}/>
     }
     const style = {fontStyle: 'italic'}
     return <div style={style}>No matching countries</div>
