@@ -3,7 +3,10 @@ import CountryDisplay from "./CountryDisplay"
 
 const MAX_DISPLAY_COUNTRIES = 10
 
-const SearchResult = ({ countries, onShowCountry }) => {
+const SearchResult = ({ countries, selectedCountry, onShowCountry }) => {
+    if (selectedCountry !== null) {
+        return <CountryDisplay country={selectedCountry} />
+    }
     if (countries.length > MAX_DISPLAY_COUNTRIES) {
       return <div>Too many matches, specify another filter</div>
     }

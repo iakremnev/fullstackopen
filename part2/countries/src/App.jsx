@@ -12,11 +12,18 @@ const countryMatchesFilter = (country, filterString) => {
 const App = () => {
     const [filterString, setFilterString] = useState("");
     const [countries, setCountries] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState(null)
 
-    const handleFilterInput = (event) => setFilterString(event.target.value)
+    const clearSelectedCountry = () => setSelectedCountry(null)
+
+    const handleFilterInput = (event) => {
+        setFilterString(event.target.value)
+        clearSelectedCountry()
+    }
     const handleShowCountry = (country) => {
         return () => {
-          setFilterString(country.name.common)
+            setFilterString(country.name.common)
+            setSelectedCountry(country)
       }
     }
 
@@ -38,7 +45,7 @@ const App = () => {
                 filterQuery={filterString}
                 handleInput={handleFilterInput}
             />
-            <SearchResult countries={filteredCountries} onShowCountry={handleShowCountry} />
+            <SearchResult countries={filteredCountries} selectedCountry={ selectedCountry } onShowCountry={handleShowCountry} />
         </div>
     );
 };
