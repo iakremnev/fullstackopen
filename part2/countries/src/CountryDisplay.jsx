@@ -15,7 +15,7 @@ const CountryDisplay = ({ country }) => {
             </ul>
 
             <img src={country.flags.png} alt={country.flags.alt} />
-            <Weather city={ country.capital[0] } />
+            <Weather city={country.capital[0]} geoLocation={ country.capitalInfo.latlng } />
         </div>
     )
 }
