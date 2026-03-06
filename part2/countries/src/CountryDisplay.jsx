@@ -1,5 +1,4 @@
 const CountryDisplay = ({ country }) => {
-  console.log(country.flag, country.flag.codePointAt(0))
     return (
         <div>
             <h1>{country.name.common}</h1>

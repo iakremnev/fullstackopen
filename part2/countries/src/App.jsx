@@ -14,6 +14,11 @@ const App = () => {
     const [countries, setCountries] = useState([]);
 
     const handleFilterInput = (event) => setFilterString(event.target.value)
+    const handleShowCountry = (country) => {
+        return () => {
+          setFilterString(country.name.common)
+      }
+    }
 
     useEffect(
         () => {
@@ -33,7 +38,7 @@ const App = () => {
                 filterQuery={filterString}
                 handleInput={handleFilterInput}
             />
-            <SearchResult countries={filteredCountries} />
+            <SearchResult countries={filteredCountries} onShowCountry={handleShowCountry} />
         </div>
     );
 };
