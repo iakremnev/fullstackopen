@@ -11,3 +11,7 @@ Implement info page with request recieved time and number of entries in the phon
 ## Exercise 3.3
 
 Display single entry, handle entry not found
+
+## Exercise 3.4
+
+Implement deleting a person
