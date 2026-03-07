@@ -15,3 +15,7 @@ Display single entry, handle entry not found
 ## Exercise 3.4
 
 Implement deleting a person
+
+## Exercise 3.5
+
+Implement adding a person

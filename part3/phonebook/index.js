@@ -1,7 +1,5 @@
 import express from 'express'
 
-const app = express()
-
 let persons = [
     {
       "id": "1",
@@ -25,6 +23,13 @@ let persons = [
     }
 ]
 
+const generateId = () => {
+  const MAX = 1000
+  return Math.ceil(Math.random() * MAX)
+}
+
+const app = express()
+app.use(express.json())
 
 app.get('/info', (request, response) => {
   const time = new Date()
@@ -52,6 +57,21 @@ app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
   persons = persons.filter(person => person.id !== id)
   response.sendStatus(204)
+})
+
+app.post('/api/persons', (request, response) => {
+  const data = request.body
+  if (!data) {
+    return response.sendStatus(422)
+  }
+  // Assume that if the data is not empty, it's well-formatted
+  const person = {
+    id: generateId(),
+    name: data.name,
+    number: data.number
+  }
+  persons.push(person)
+  response.send(person)
 })
 
 const PORT = 3001
