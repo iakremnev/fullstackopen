@@ -24,6 +24,15 @@ let persons = [
     }
 ]
 
+const logFormat = (tokens, request, response) => [
+  tokens.method(request, response),
+  tokens.url(request, response),
+  tokens.status(request, response),
+  tokens.res(request, response, 'content-length'), '-',
+  tokens['response-time'](request, response), 'ms',
+  JSON.stringify(request.body)
+  ].join(' ')
+
 const generateId = () => {
   const MAX = 1000
   return Math.ceil(Math.random() * MAX)
@@ -31,7 +40,7 @@ const generateId = () => {
 
 const app = express()
 app.use(express.json())
-app.use(morgan('tiny'))
+app.use(morgan(logFormat))
 
 app.get('/info', (request, response) => {
   const time = new Date()

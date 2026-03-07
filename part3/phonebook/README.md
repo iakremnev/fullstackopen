@@ -29,3 +29,7 @@ Implement error handling for adding a new person:
 ## Exercise 3.7
 
 Add [morgan](https://github.com/expressjs/morgan) middleware for logging
+
+## Exercise 3.8
+
+Configure morgan so it shows POST data
