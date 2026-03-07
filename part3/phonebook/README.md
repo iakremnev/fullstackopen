@@ -19,3 +19,9 @@ Implement deleting a person
 ## Exercise 3.5
 
 Implement adding a person
+
+## Exercise 3.6
+
+Implement error handling for adding a new person:
+1. The name or number is missing
+2. The name already exists in the phonebook

@@ -64,7 +64,25 @@ app.post('/api/persons', (request, response) => {
   if (!data) {
     return response.sendStatus(422)
   }
-  // Assume that if the data is not empty, it's well-formatted
+
+  // Error if any of the required fields are missing
+  if (data.name === undefined) {
+    return response.status(422).send({
+      error: 'name is missing'
+    })
+  }
+  if (data.number === undefined)  {
+    return response.status(422).send({
+      error: 'number is missing'
+    })
+  }
+  // Check if name is already in the phonebook
+  const existingPerson = persons.find(person => person.name === data.name)
+  if (existingPerson) {
+    return response.status(409).send({
+      error: 'person with given name already exists in the phonebook'
+    })
+  }
   const person = {
     id: generateId(),
     name: data.name,
