@@ -1,4 +1,5 @@
 import express from 'express'
+import morgan from 'morgan'
 
 let persons = [
     {
@@ -30,6 +31,7 @@ const generateId = () => {
 
 const app = express()
 app.use(express.json())
+app.use(morgan('tiny'))
 
 app.get('/info', (request, response) => {
   const time = new Date()

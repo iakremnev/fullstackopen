@@ -25,3 +25,7 @@ Implement adding a person
 Implement error handling for adding a new person:
 1. The name or number is missing
 2. The name already exists in the phonebook
+
+## Exercise 3.7
+
+Add [morgan](https://github.com/expressjs/morgan) middleware for logging
