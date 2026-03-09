@@ -33,3 +33,7 @@ Add [morgan](https://github.com/expressjs/morgan) middleware for logging
 ## Exercise 3.8
 
 Configure morgan so it shows POST data
+
+## Exercise 3.9
+
+Make the phonebook backend work with phonebook frontend from part 2
