@@ -104,7 +104,7 @@ app.post('/api/persons', (request, response) => {
   response.send(person)
 })
 
-const PORT = 3001
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3001
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Phonebook server listening on port ${PORT}`)
 })
