@@ -38,6 +38,6 @@ Configure morgan so it shows POST data
 
 Make the phonebook backend work with phonebook frontend from part 2
 
-## Exercise 3.10
+## Exercise 3.10-3.11
 
 Configure frontend build and deploy the fullstack app to Internet (Google)
