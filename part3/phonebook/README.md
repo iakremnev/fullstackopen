@@ -40,4 +40,8 @@ Make the phonebook backend work with phonebook frontend from part 2
 
 ## Exercise 3.10-3.11
 
-Configure frontend build and deploy the fullstack app to Internet (Google)
+Configure frontend build and deploy the fullstack app to Internet (GCP App Engine)
+
+## Exercise 3.12
+
+Add `mongo.js` module that serves as CLI for adding and viewing phonebook data in a Mongo database
