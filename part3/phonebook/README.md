@@ -77,3 +77,7 @@ Validate name with Mongoose Schema
 ## Exercise 3.20
 
 Validate number with custom validator
+
+## Exercise 3.21
+
+Build the frontend and deploy the application to cloud

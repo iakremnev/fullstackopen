@@ -8,10 +8,10 @@
   "main": "index.js",
   "scripts": {
     "build:ui": "rm -rf dist && cd ../../part2/phonebook && npm run build && cp -r dist ../../part3/phonebook",
-    "start": "node --env-file=.env index.js",
+    "start": "node index.js",
     "dev": "node --watch --env-file=.env index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy:full": "npm build:ui && gcloud app deploy"
+    "deploy:full": "npm run build:ui && gcloud app deploy"
   },
   "dependencies": {
     "express": "^5.2.1",
