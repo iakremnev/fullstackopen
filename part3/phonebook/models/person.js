@@ -5,7 +5,10 @@ const uri = process.env.MONGODB_URI
 mongoose.connect(uri, {family: 4})
 
 const PersonSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    minLength: 3
+  },
   number: String
 })
 PersonSchema.set('toJSON', {

@@ -69,3 +69,7 @@ Support updating a phonebook entry on the database level
 ## Exercise 3.18
 
 Support fetching all persons and /info page
+
+## Exercose 3.19
+
+Validate name with Mongoose Schema
