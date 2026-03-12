@@ -124,7 +124,6 @@ app.post('/api/persons', (request, response) => {
 })
 
 const errorHandler = (error, request, response, next) => {
-  console.error(error)
   if (error.name === 'CastError') {
     response.status(400).send({error: 'malformed id'})
   }

@@ -60,4 +60,12 @@ Phonebook entry deletion is reflected in the database
 
 ## Exercise 3.16
 
+Add error handling middleware and intercept malformed ids
+
+## Exercise 3.17
+
 Support updating a phonebook entry on the database level
+
+## Exercise 3.18
+
+Support fetching all persons and /info page
