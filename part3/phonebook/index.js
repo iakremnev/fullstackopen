@@ -33,7 +33,7 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person
     .findById(id)
@@ -45,23 +45,15 @@ app.get('/api/persons/:id', (request, response) => {
         response.sendStatus(404)
       }
     })
-    .catch(error => {
-      console.error(error)
-      response.status(400).send({
-        error: "malformed id"
-      })
-    })
+    .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person
     .findByIdAndDelete(id)
     .then(result => response.sendStatus(204))
-    .catch(error => {
-      cosole.error(error)
-      response.sendStatus(500)
-    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', (request, response) => {
@@ -95,6 +87,16 @@ app.post('/api/persons', (request, response) => {
     response.send(person)
   })
 })
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error)
+  if (error.name === 'CastError') {
+    response.status(400).send({error: 'malformed id'})
+  }
+  next(error)
+}
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, '0.0.0.0', () => {
