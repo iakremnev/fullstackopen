@@ -81,3 +81,7 @@ Validate number with custom validator
 ## Exercise 3.21
 
 Build the frontend and deploy the application to cloud
+
+## Exercise 3.22
+
+Install and run eslint

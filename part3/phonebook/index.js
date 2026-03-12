@@ -10,7 +10,7 @@ const logFormat = (tokens, request, response) => [
   tokens.res(request, response, 'content-length'), '-',
   tokens['response-time'](request, response), 'ms',
   JSON.stringify(request.body)
-  ].join(' ')
+].join(' ')
 
 const app = express()
 app.use(express.json())
@@ -48,7 +48,7 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-const validatePayload = (data, response) => {
+const validatePayload = (data) => {
   if (!data) {
     return {
       status: 422,
@@ -68,14 +68,14 @@ const validatePayload = (data, response) => {
       error: 'number is missing'
     }
   }
-  return {status: null, error: null}
+  return { status: null, error: null }
 }
 
 app.put('/api/persons/:id', (request, response, next) => {
   const data = request.body
-  const {status, error} = validatePayload(data)
+  const { status, error } = validatePayload(data)
   if (error) {
-    return response.status(status).send({error: error})
+    return response.status(status).send({ error: error })
   }
 
   const id = request.params.id
@@ -99,15 +99,15 @@ app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person
     .findByIdAndDelete(id)
-    .then(result => response.sendStatus(204))
+    .then(result => response.sendStatus(204))  // eslint-disable-line no-unused-vars
     .catch(error => next(error))
 })
 
 app.post('/api/persons', (request, response, next) => {
   const data = request.body
-  const {status, error} = validatePayload(data)
+  const { status, error } = validatePayload(data)
   if (error) {
-    return response.status(status).send({error: error})
+    return response.status(status).send({ error: error })
   }
   // TODO: Check if name is already in the phonebook
   // if (existingPerson) {
@@ -127,9 +127,9 @@ app.post('/api/persons', (request, response, next) => {
 
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
-    response.status(400).send({error: 'malformed id'})
+    response.status(400).send({ error: 'malformed id' })
   } else if (error.name === 'ValidationError') {
-    response.status(400).json({error: error.message})
+    response.status(400).json({ error: error.message })
   }
   next(error)
 }

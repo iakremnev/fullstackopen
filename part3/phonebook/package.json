@@ -11,11 +11,18 @@
     "start": "node index.js",
     "dev": "node --watch --env-file=.env index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy:full": "npm run build:ui && gcloud app deploy"
+    "deploy:full": "npm run build:ui && gcloud app deploy",
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "express": "^5.2.1",
     "mongoose": "^8.23.0",
     "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0"
   }
 }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose'
 
 
 if (process.argv.length !== 2 && process.argv.length !== 4) {
@@ -26,7 +26,7 @@ const addPeronSubcommand = () => {
 }
 
 const viewPersonListSubcommand = () => {
-  console.log("phonebook:")
+  console.log('phonebook:')
   Person.find({}).then(result => {
     result.forEach(person => {
       console.log(`${person.name} ${person.number}`)
