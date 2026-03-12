@@ -73,3 +73,7 @@ Support fetching all persons and /info page
 ## Exercose 3.19
 
 Validate name with Mongoose Schema
+
+## Exercise 3.20
+
+Validate number with custom validator
