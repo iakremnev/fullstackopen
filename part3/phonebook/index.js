@@ -20,9 +20,11 @@ app.use(express.static('dist'))
 
 app.get('/info', (request, response) => {
   const time = new Date()
-  const message = `Phonebook has info for ${persons.length} people`
-  const html = `<html><body><p>${message}</p><p>${time.toString()}</p></body></html>`
-  response.send(html)
+  Person.find({}, '').then(result => {
+    const message = `Phonebook has info for ${result.length} people`
+    const html = `<html><body><p>${message}</p><p>${time.toString()}</p></body></html>`
+    response.send(html)
+  })
 })
 
 app.get('/api/persons', (request, response) => {
