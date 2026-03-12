@@ -49,3 +49,7 @@ Add `mongo.js` module that serves as CLI for adding and viewing phonebook data i
 ## Exercise 3.13
 
 Phonebook fetches all notes from the database
+
+## Exercise 3.14
+
+New phonebook entries are saved to the database

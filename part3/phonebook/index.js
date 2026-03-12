@@ -64,20 +64,19 @@ app.post('/api/persons', (request, response) => {
       error: 'number is missing'
     })
   }
-  // Check if name is already in the phonebook
-  const existingPerson = persons.find(person => person.name === data.name)
-  if (existingPerson) {
-    return response.status(409).send({
-      error: 'person with given name already exists in the phonebook'
-    })
-  }
-  const person = {
-    id: generateId(),
+  // TODO: Check if name is already in the phonebook
+  // if (existingPerson) {
+  //   return response.status(409).send({
+  //     error: 'person with given name already exists in the phonebook'
+  //   })
+  // }
+  const person = new Person({
     name: data.name,
     number: data.number
-  }
-  persons.push(person)
-  response.send(person)
+  })
+  person.save().then(result => {
+    response.send(person)
+  })
 })
 
 const PORT = process.env.PORT || 3001
