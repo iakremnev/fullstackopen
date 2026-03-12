@@ -55,8 +55,13 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
-  persons = persons.filter(person => person.id !== id)
-  response.sendStatus(204)
+  Person
+    .findByIdAndDelete(id)
+    .then(result => response.sendStatus(204))
+    .catch(error => {
+      cosole.error(error)
+      response.sendStatus(500)
+    })
 })
 
 app.post('/api/persons', (request, response) => {
