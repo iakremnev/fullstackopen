@@ -45,3 +45,7 @@ Configure frontend build and deploy the fullstack app to Internet (GCP App Engin
 ## Exercise 3.12
 
 Add `mongo.js` module that serves as CLI for adding and viewing phonebook data in a Mongo database
+
+## Exercise 3.13
+
+Phonebook fetches all notes from the database

@@ -35,12 +35,10 @@ const viewPersonListSubcommand = () => {
   })
 }
 
-const USER = process.env.MONGO_USER
-const PASSWORD = process.env.MONGO_PASSWORD
-const url = "mongodb+srv://user:pass@fullstaskopen.nmewkdf.mongodb.net/?appName=fullstaskopen"
+const uri = process.env.MONGODB_URI
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url, { family: 4, user: USER, pass: PASSWORD })
+mongoose.connect(uri, { family: 4 })
 
 const personSchema = new mongoose.Schema({
   name: String,
