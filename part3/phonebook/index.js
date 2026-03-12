@@ -48,6 +48,52 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+const validatePayload = (data, response) => {
+  if (!data) {
+    return {
+      status: 422,
+      error: 'missing body'
+    }
+  }
+  // Error if any of the required fields are missing
+  if (data.name === undefined) {
+    return {
+      status: 422,
+      error: 'name is missing'
+    }
+  }
+  if (data.number === undefined)  {
+    return {
+      status: 422,
+      error: 'number is missing'
+    }
+  }
+  return {status: null, error: null}
+}
+
+app.put('/api/persons/:id', (request, response, next) => {
+  const data = request.body
+  const {status, error} = validatePayload(data)
+  if (error) {
+    return response.status(status).send({error: error})
+  }
+
+  const id = request.params.id
+  Person
+    .findById(id)
+    .then(person => {
+      if (!person) {
+        return response.sendStatus(404)
+      }
+      person.name = data.name
+      person.number = data.number
+      person.save().then(updatedPerson => {
+        response.send(updatedPerson)
+      })
+    })
+    .catch(error => next(error))
+})
+
 app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person
@@ -58,20 +104,9 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
 app.post('/api/persons', (request, response) => {
   const data = request.body
-  if (!data) {
-    return response.sendStatus(422)
-  }
-
-  // Error if any of the required fields are missing
-  if (data.name === undefined) {
-    return response.status(422).send({
-      error: 'name is missing'
-    })
-  }
-  if (data.number === undefined)  {
-    return response.status(422).send({
-      error: 'number is missing'
-    })
+  const {status, error} = validatePayload(data)
+  if (error) {
+    return response.status(status).send({error: error})
   }
   // TODO: Check if name is already in the phonebook
   // if (existingPerson) {

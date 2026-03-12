@@ -57,3 +57,7 @@ New phonebook entries are saved to the database
 ## Exercise 3.15
 
 Phonebook entry deletion is reflected in the database
+
+## Exercise 3.16
+
+Support updating a phonebook entry on the database level
