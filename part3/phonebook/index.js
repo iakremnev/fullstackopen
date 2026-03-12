@@ -37,8 +37,20 @@ app.get('/api/persons/:id', (request, response) => {
   const id = request.params.id
   Person
     .findById(id)
-    .then(result => response.send(result))
-    .catch(error => response.sendStatus(404))
+    .then(result => {
+      if (result) {
+        response.send(result)
+      }
+      else {
+        response.sendStatus(404)
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      response.status(400).send({
+        error: "malformed id"
+      })
+    })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
