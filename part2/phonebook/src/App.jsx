@@ -66,7 +66,8 @@ const App = () => {
                             color: "green",
                         }, 5000);
                     })
-                    .catch((error) => {
+                    .catch(error => {
+                      if (error.response.status === 404) {
                         setPersons(
                             persons.filter((person) => person.id !== id),
                         );
@@ -74,16 +75,32 @@ const App = () => {
                             message: `Information of ${newPerson.name} has already been removed from server`,
                             color: "red",
                         }, 5000);
+                      } else if (error.response.status == 400) {
+                        setNotificationWithTimeout({
+                            message: error.response.data.error,
+                            color: "red",
+                        }, 5000);
+                      }
                     });
             }
         } else {
             personService
                 .create(newPerson)
-                .then((person) => setPersons(persons.concat(person)));
-            setNotificationWithTimeout({
-                message: `Added ${newPerson.name}`,
-                color: "green",
-            }, 5000);
+                .then(person => {
+                  setPersons(persons.concat(person))
+                  setNotificationWithTimeout({
+                      message: `Added ${newPerson.name}`,
+                      color: "green",
+                  }, 5000);
+                })
+                .catch(error => {
+                  const errorMessage = error.response.data.error
+                  console.error(errorMessage)
+                  setNotificationWithTimeout({
+                      message: errorMessage,
+                      color: "red",
+                  }, 5000);
+                });
         }
 
         setNewName("");
