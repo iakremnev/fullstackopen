@@ -1,4 +1,4 @@
-import {countBy, findKey} from 'lodash-es'
+import { countBy, findKey, get, transform } from 'lodash-es'
 
 const dummy = (blogs) => {
   return 1
@@ -26,4 +26,16 @@ const mostBlogs = (blogs) => {
   return { author: authorWithMostBlogs, blogs: mostBlogs }
 }
 
-export default { dummy, totalLikes, favoriteBlog, mostBlogs }
+const mostLikes = (blogs) => {
+  if (blogs.length === 0) {
+    return undefined
+  }
+  const likesByAuthor = transform(blogs, (result, item) => {
+    result[item.author] = get(result, item.author, 0) + item.likes
+  })
+  const mostLikes = Math.max(...Object.values(likesByAuthor))
+  const authorWithMostLikes = findKey(likesByAuthor, value => value === mostLikes)
+  return { author: authorWithMostLikes, likes: mostLikes }
+}
+
+export default { dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes }

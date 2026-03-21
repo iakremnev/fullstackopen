@@ -23,3 +23,7 @@ Write `favoriteBlog` function and unit tests for it
 ## Exercise 4.6
 
 Write `mostBlogs` function and unit tests for it
+
+## Exercise 4.7
+
+Write `mostLikes` function and unit tests for it

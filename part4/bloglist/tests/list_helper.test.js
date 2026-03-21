@@ -171,3 +171,52 @@ describe('most blogs', () => {
     assert.deepStrictEqual(result, expectedMostBlogs)
   })
 })
+
+describe('most likes', () => {
+  const listWithZeroBlogs = []
+  const listWithManyBlogs = [
+    {
+      _id: '69bd8c77131e3d2426566b02',
+      title: 'Monday Trip',
+      author: 'Lucy Green',
+      url: 'https://lucygreenjournal.co/moday-trip',
+      likes: 4,
+      __v: 0
+    },
+    {
+      _id: '69bd8d26131e3d2426566b03',
+      title: 'Fried Potatoes',
+      author: 'Karl Demidui',
+      url: 'https://743-daily-journals.moo.com/',
+      likes: 13,
+      __v: 0
+    },
+    {
+      _id: '69bf06b94c5caab0284df714',
+      title: 'Tuesday Trip',
+      author: 'Lucy Green',
+      url: 'https://lucygreenjournal.co/tuesday-trip',
+      likes: 2,
+      __v: 0
+    },
+    {
+      _id: '69bd8d8c131e3d2426566b04',
+      title: 'Monday trip again',
+      author: 'James Curiuos',
+      url: 'https://uternalsweets.co/killing-it',
+      likes: 1,
+      __v: 0
+    }
+  ]
+
+  test('most likes of empty blog list is undefined', () => {
+    const result = listHelper.mostLikes(listWithZeroBlogs)
+    assert.strictEqual(result, undefined)
+  })
+
+  test('many blogs', () => {
+    const result = listHelper.mostLikes(listWithManyBlogs)
+    const expectedMostLikes = { author: 'Karl Demidui', likes: 13 }
+    assert.deepStrictEqual(result, expectedMostLikes)
+  })
+})
