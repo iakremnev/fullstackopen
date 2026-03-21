@@ -15,3 +15,7 @@ Write a `dummy` function that recieves a collection of blogs and returns 1. Writ
 ## Exercise 4.4
 
 Write `totalLikes` function and unit tests for it
+
+## Exercise 4.5
+
+Write `favoriteBlog` function and unit tests for it
