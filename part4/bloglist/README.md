@@ -27,3 +27,8 @@ Write `mostBlogs` function and unit tests for it
 ## Exercise 4.7
 
 Write `mostLikes` function and unit tests for it
+
+## Exercise 4.8
+
+Write integration test for `GET /api/blogs` using SuperTest. Refactor the endpoint using async/await syntax.
+Separate development, test, and production environments.
