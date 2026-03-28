@@ -56,7 +56,7 @@ describe('Add new blog post', () => {
   test('total number of blogs increased by 1', async () => {
     const allBlogsBefore = await helper.allBlogsInDB()
 
-    const response = await api
+    await api
       .post('/api/blogs')
       .send(helper.singleBlog)
       .expect(201)
