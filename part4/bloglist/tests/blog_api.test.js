@@ -8,18 +8,32 @@ import mongoose from 'mongoose'
 
 const api = supertest(app)
 
-beforeEach(async () => {
-  await Blog.deleteMany({})
-  await Blog.insertMany(helper.initialBlogs)
-})
+describe('reading blogs from the DB', () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+    await Blog.insertMany(helper.initialBlogs)
+  })
 
-test.only('all blogs are returned', async () => {
-  const responseBlogs = await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-type', /application\/json/)
+  test('all blogs are returned', async () => {
+    const responseBlogs = await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-type', /application\/json/)
 
-  assert.strictEqual(responseBlogs.body.length, helper.initialBlogs.length)
+    assert.strictEqual(responseBlogs.body.length, helper.initialBlogs.length)
+  })
+
+  test('unique blog identifier is named "id"', async () => {
+    const responseBlogs = await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-type', /application\/json/)
+
+    responseBlogs.body.forEach(blog => {
+      assert('id' in blog)
+    })
+  })
+
 })
 
 after(async () => {

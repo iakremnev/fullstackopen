@@ -32,3 +32,7 @@ Write `mostLikes` function and unit tests for it
 
 Write integration test for `GET /api/blogs` using SuperTest. Refactor the endpoint using async/await syntax.
 Separate development, test, and production environments.
+
+## Exercise 4.9
+
+Check that the unique identifier of a blog is named "id"
