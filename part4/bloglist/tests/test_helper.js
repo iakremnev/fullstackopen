@@ -28,8 +28,14 @@ const singleBlog = {
   url: 'https://eclipse-games.co.uk/second-dawn'
 }
 
+const blogWithoutLikes = {
+  title: 'Cool winter',
+  author: 'Robert Martin',
+  url: 'https://robertmblogs.org/cool-winter'
+}
+
 const allBlogsInDB = async () => {
   return await Blog.find({})
 }
 
-export default { initialBlogs, singleBlog, allBlogsInDB }
+export default { initialBlogs, singleBlog, blogWithoutLikes, allBlogsInDB }

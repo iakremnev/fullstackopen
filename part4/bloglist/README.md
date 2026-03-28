@@ -40,3 +40,7 @@ Check that the unique identifier of a blog is named "id"
 ## Exercise 4.10
 
 Test for adding a new blog post. Rewrite the API method using async/await syntax.
+
+## Exercise 4.11
+
+Test default value of `likes` property equal to 0. Make the required change.

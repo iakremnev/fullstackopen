@@ -1,5 +1,5 @@
 import assert from 'node:assert'
-import { describe, test, beforeEach, after } from 'node:test'
+import { describe, test, beforeEach, after, before } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import Blog from '../models/blog.js'
@@ -65,6 +65,22 @@ describe('Add new blog post', () => {
     const allBlogsAfter = await helper.allBlogsInDB()
 
     assert.strictEqual(allBlogsAfter.length, allBlogsBefore.length + 1)
+  })
+})
+
+describe.only('Default values', () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+  })
+
+  test.only('likes = 0', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.blogWithoutLikes)
+      .expect(201)
+      .expect('Content-type', /application\/json/)
+
+    assert.strictEqual(response.body.likes, 0)
   })
 })
 
