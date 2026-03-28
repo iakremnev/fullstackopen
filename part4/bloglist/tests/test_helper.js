@@ -21,8 +21,15 @@ const initialBlogs = [
   }
 ]
 
+const singleBlog = {
+  title: 'A new dawn for the Galaxy',
+  author: 'Eclipse R',
+  likes: 12,
+  url: 'https://eclipse-games.co.uk/second-dawn'
+}
+
 const allBlogsInDB = async () => {
   return await Blog.find({})
 }
 
-export default {initialBlogs, allBlogsInDB}
+export default {initialBlogs, singleBlog, allBlogsInDB}

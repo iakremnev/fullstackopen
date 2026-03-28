@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 
 const api = supertest(app)
 
-describe('reading blogs from the DB', () => {
+describe('Fetch blogs from DB', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(helper.initialBlogs)
@@ -33,7 +33,39 @@ describe('reading blogs from the DB', () => {
       assert('id' in blog)
     })
   })
+})
 
+describe('Add new blog post', () => {
+
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+  })
+
+  test('contents is identical', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+      .expect(201)
+      .expect('Content-type', /application\/json/)
+
+    const addedBlog = response.body
+    delete addedBlog.id
+    assert.deepStrictEqual(addedBlog, helper.singleBlog)
+  })
+
+  test('total number of blogs increased by 1', async () => {
+    const allBlogsBefore = await helper.allBlogsInDB()
+
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+      .expect(201)
+      .expect('Content-type', /application\/json/)
+
+    const allBlogsAfter = await helper.allBlogsInDB()
+
+    assert.strictEqual(allBlogsAfter.length, allBlogsBefore.length + 1)
+  })
 })
 
 after(async () => {

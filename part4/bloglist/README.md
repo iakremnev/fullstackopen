@@ -36,3 +36,7 @@ Separate development, test, and production environments.
 ## Exercise 4.9
 
 Check that the unique identifier of a blog is named "id"
+
+## Exercise 4.10
+
+Test for adding a new blog post. Rewrite the API method using async/await syntax.
