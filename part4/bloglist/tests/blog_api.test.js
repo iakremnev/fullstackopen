@@ -68,12 +68,12 @@ describe('Add new blog post', () => {
   })
 })
 
-describe.only('Default values', () => {
+describe('Default values', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})
   })
 
-  test.only('likes = 0', async () => {
+  test('likes = 0', async () => {
     const response = await api
       .post('/api/blogs')
       .send(helper.blogWithoutLikes)
@@ -81,6 +81,26 @@ describe.only('Default values', () => {
       .expect('Content-type', /application\/json/)
 
     assert.strictEqual(response.body.likes, 0)
+  })
+})
+
+describe.only('Required blog fields', () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+  })
+
+  test.only('url', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.blogWithoutUrl)
+      .expect(400)
+  })
+
+  test.only('title', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.blogWithoutTitle)
+      .expect(400)
   })
 })
 

@@ -34,8 +34,27 @@ const blogWithoutLikes = {
   url: 'https://robertmblogs.org/cool-winter'
 }
 
+const blogWithoutUrl = {
+  title: 'Cool winter',
+  author: 'Robert Martin',
+  likes: 5
+}
+
+const blogWithoutTitle = {
+  author: 'Robert Martin',
+  url: 'https://robertmblogs.org/cool-winter',
+  likes: 5
+}
+
 const allBlogsInDB = async () => {
   return await Blog.find({})
 }
 
-export default { initialBlogs, singleBlog, blogWithoutLikes, allBlogsInDB }
+export default {
+  initialBlogs,
+  singleBlog,
+  blogWithoutLikes,
+  blogWithoutUrl,
+  blogWithoutTitle,
+  allBlogsInDB
+}

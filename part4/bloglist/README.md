@@ -43,4 +43,8 @@ Test for adding a new blog post. Rewrite the API method using async/await syntax
 
 ## Exercise 4.11
 
-Test default value of `likes` property equal to 0. Make the required change.
+Test default value of `likes` property equal to 0. Make the required API change.
+
+## Exercise 4.12
+
+Test that blogs posted without url or title are returned with 400 Bad Request. Make the required API change.
