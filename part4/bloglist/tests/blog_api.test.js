@@ -1,5 +1,5 @@
 import assert from 'node:assert'
-import { describe, test, beforeEach, after, before } from 'node:test'
+import { describe, test, beforeEach, after } from 'node:test'
 import supertest from 'supertest'
 import app from '../app.js'
 import Blog from '../models/blog.js'
@@ -84,23 +84,53 @@ describe('Default values', () => {
   })
 })
 
-describe.only('Required blog fields', () => {
+describe('Required blog fields', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})
   })
 
-  test.only('url', async () => {
+  test('url', async () => {
     const response = await api
       .post('/api/blogs')
       .send(helper.blogWithoutUrl)
       .expect(400)
   })
 
-  test.only('title', async () => {
+  test('title', async () => {
     const response = await api
       .post('/api/blogs')
       .send(helper.blogWithoutTitle)
       .expect(400)
+  })
+})
+
+describe('when a blog post is deleted', () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+    await Blog.insertMany(helper.initialBlogs)
+  })
+
+  test('total number of blogs is 1 less', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+      .expect(201)
+
+    const totalBeforeDelete = (await helper.allBlogsInDB()).length
+    await api.delete(`/api/blogs/${response.body.id}`)
+    const totalAfterDelete = (await helper.allBlogsInDB()).length
+
+    assert.strictEqual(totalAfterDelete, totalBeforeDelete - 1)
+  })
+
+  test('statuscode 204 is returned for valid id', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+
+    await api
+      .delete(`/api/blogs/${response.body.id}`)
+      .expect(204)
   })
 })
 

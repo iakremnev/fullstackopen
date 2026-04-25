@@ -48,3 +48,7 @@ Test default value of `likes` property equal to 0. Make the required API change.
 ## Exercise 4.12
 
 Test that blogs posted without url or title are returned with 400 Bad Request. Make the required API change.
+
+## Exercise 4.13
+
+Implement functionality for deleting a single blog post. Implement tests.
