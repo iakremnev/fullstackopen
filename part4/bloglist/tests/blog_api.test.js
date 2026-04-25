@@ -134,6 +134,50 @@ describe('when a blog post is deleted', () => {
   })
 })
 
+describe('when updating an individual blog post', async () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+  }
+  )
+
+  test('total number of blogs doesn\'t change', async () => {
+    const response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+      .expect(201)
+
+    const newBlog = response.body
+    newBlog.likes += 10
+
+    const totalBeforeUpdate = await helper.allBlogsInDB().length
+    await api
+      .put(`/api/blogs/${newBlog.id}`)
+      .send(newBlog)
+      .expect(200)
+    const totalAfterUpdate = await helper.allBlogsInDB().length
+    assert.strictEqual(totalAfterUpdate, totalBeforeUpdate)
+  })
+
+  test('contents is identical', async () => {
+    let response = await api
+      .post('/api/blogs')
+      .send(helper.singleBlog)
+      .expect(201)
+
+    const newBlog = response.body
+    newBlog.likes += 10
+
+    response = await api
+      .put(`/api/blogs/${newBlog.id}`)
+      .send(newBlog)
+      .expect(200)
+    const updatedBlog = response.body
+    assert.deepStrictEqual(updatedBlog, newBlog)
+  })
+
+
+})
+
 after(async () => {
   await mongoose.connection.close()
 })

@@ -52,3 +52,7 @@ Test that blogs posted without url or title are returned with 400 Bad Request. M
 ## Exercise 4.13
 
 Implement functionality for deleting a single blog post. Implement tests.
+
+## Exercise 4.14
+
+Implement functionality for updating the information of an individual blog post. Implement tests.
