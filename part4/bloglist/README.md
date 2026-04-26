@@ -56,3 +56,7 @@ Implement functionality for deleting a single blog post. Implement tests.
 ## Exercise 4.14
 
 Implement functionality for updating the information of an individual blog post. Implement tests.
+
+## Exercise 4.15
+
+Add User model. Add endpoint for user creation. Add endpoint for getting all users.

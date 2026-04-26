@@ -50,11 +50,18 @@ const allBlogsInDB = async () => {
   return await Blog.find({})
 }
 
+const singleUser = {
+  username: 'tinycrab101',
+  password: 'PassW0r!D',
+  name: 'Henry Shultz'
+}
+
 export default {
   initialBlogs,
   singleBlog,
   blogWithoutLikes,
   blogWithoutUrl,
   blogWithoutTitle,
-  allBlogsInDB
+  allBlogsInDB,
+  singleUser
 }
