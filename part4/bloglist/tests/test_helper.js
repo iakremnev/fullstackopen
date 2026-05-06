@@ -1,4 +1,5 @@
 import Blog from '../models/blog.js'
+import password from '../utils/password.js'
 
 const initialBlogs = [
   {
@@ -56,6 +57,18 @@ const singleUser = {
   name: 'Henry Shultz'
 }
 
+const userWithShortUsername = {
+  username: 'ai',
+  password: 'dmpoewmf',
+  name: 'XZibit'
+}
+
+const userWithShortPassword = {
+  username: 'longerAi',
+  password: '',
+  name: 'Ling Johnson'
+}
+
 export default {
   initialBlogs,
   singleBlog,
@@ -63,5 +76,7 @@ export default {
   blogWithoutUrl,
   blogWithoutTitle,
   allBlogsInDB,
-  singleUser
+  singleUser,
+  userWithShortUsername,
+  userWithShortPassword
 }

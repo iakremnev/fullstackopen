@@ -13,10 +13,10 @@ usersRouter.post('/', async (request, response) => {
   const userPayload = request.body
 
   if (userPayload.username.length < 3) {
-    return response.status(400).send('Username must be at least 3 characters long')
+    return response.status(400).send({ error: 'Username must be at least 3 characters long' })
   }
   if (userPayload.password.length < 3) {
-    return response.status(400).send('Password must be at least 3 characters long')
+    return response.status(400).send({ error: 'Password must be at least 3 characters long' })
   }
 
   const newUser = await User({

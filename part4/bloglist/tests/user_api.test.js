@@ -40,7 +40,7 @@ describe.only('When user is added', () => {
     ))
   })
 
-  test.only('can\'t add another user with the same username', async () => {
+  test('can\'t add another user with the same username', async () => {
     const firstResponse = await api
       .post('/api/users')
       .send(helper.singleUser)
@@ -49,7 +49,23 @@ describe.only('When user is added', () => {
       .post('/api/users')
       .send(helper.singleUser)
       .expect(400)
-    assert(secondResponse.body.error === 'Username must be unique')
+    assert.strictEqual(secondResponse.body.error, 'Username must be unique')
+  })
+
+  test('short username is rejected', async () => {
+    const response = await api
+      .post('/api/users')
+      .send(helper.userWithShortUsername)
+      .expect(400)
+    assert.strictEqual(response.body.error, 'Username must be at least 3 characters long')
+  })
+
+  test('short password is rejected', async () => {
+    const response = await api
+      .post('/api/users')
+      .send(helper.userWithShortPassword)
+      .expect(400)
+    assert.strictEqual(response.body.error, 'Password must be at least 3 characters long')
   })
 })
 
