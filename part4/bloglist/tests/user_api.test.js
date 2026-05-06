@@ -15,7 +15,7 @@ describe.only('When user is added', () => {
     await User.deleteMany({})
   })
 
-  test.only('collection of users has 1 more user', async () => {
+  test('collection of users has 1 more user', async () => {
     const totalBeforeAdd = await User.countDocuments({})
     await api
       .post('/api/users')
@@ -26,7 +26,7 @@ describe.only('When user is added', () => {
     assert.strictEqual(totalAfterAdd, totalBeforeAdd + 1)
   })
 
-  test.only('api doesn\'t return user password', async () => {
+  test('api doesn\'t return user password', async () => {
     const passwordAliases = ['password', 'passwordHash', 'password_hash']
     const response = await api
       .post('/api/users')
@@ -39,7 +39,20 @@ describe.only('When user is added', () => {
       true
     ))
   })
+
+  test.only('can\'t add another user with the same username', async () => {
+    const firstResponse = await api
+      .post('/api/users')
+      .send(helper.singleUser)
+      .expect(201)
+    const secondResponse = await api
+      .post('/api/users')
+      .send(helper.singleUser)
+      .expect(400)
+    assert(secondResponse.body.error === 'Username must be unique')
+  })
 })
+
 
 after(async () => {
   await mongoose.connection.close()
