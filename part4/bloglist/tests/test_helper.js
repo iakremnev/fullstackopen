@@ -1,5 +1,4 @@
 import Blog from '../models/blog.js'
-import password from '../utils/password.js'
 
 const initialBlogs = [
   {
