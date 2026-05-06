@@ -80,3 +80,7 @@ Require token authentication when adding a new blog. Authenticated user is the c
 ## Exercise 4.20
 
 Refactor token extraction into a middleware
+
+## Exercise 4.21
+
+Blog can only be deleted by its creator.
