@@ -84,3 +84,7 @@ Refactor token extraction into a middleware
 ## Exercise 4.21
 
 Blog can only be deleted by its creator.
+
+## Exercise 4.22
+
+Create userExtractor middleware

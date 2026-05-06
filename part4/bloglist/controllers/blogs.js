@@ -12,45 +12,29 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.post('/', async (request, response) => {
-  if (request.token === undefined) {
+  const user = request.user
+  if (user === undefined) {
     return response.sendStatus(403)
   }
 
-  let decodedToken = null
-  try {
-    decodedToken = jwt.verify(request.token, process.env.JWTSECRET)
-  } catch (error) {
-    if (error.name === 'JsonWebTokenError') {
-      return response.sendStatus(403)
-    }
-  }
-
-  console.log(decodedToken)
-
-  const creatorUser = await User.findOne({ username: decodedToken.username })
-  const blog = new Blog({ ...request.body, user: creatorUser })
+  const blog = new Blog({ ...request.body, user })
   const addedBlog = await blog.save()
-  creatorUser.blogs.push(blog)
-  await creatorUser.save()
+  user.blogs.push(blog)
+  await user.save()
   response.status(201).json(addedBlog)
 })
 
 blogsRouter.delete('/:id', async (request, response) => {
-  if (request.token === undefined) {
+  const user = request.user
+  if (user === undefined) {
     return response.sendStatus(403)
   }
 
-  let decodedToken = null
-  try {
-    decodedToken = jwt.verify(request.token, process.env.JWTSECRET)
-  } catch (error) {
-    if (error.name === 'JsonWebTokenError') {
-      return response.sendStatus(403)
-    }
-  }
-
   const blog = await Blog.findById(request.params.id)
-  if (blog.user.toString() !== decodedToken.id) {
+  if (blog === null) {
+    return response.sendStatus(404)
+  }
+  if (blog.user.toString() !== user._id.toString()) {
     return response.sendStatus(403)
   }
 
