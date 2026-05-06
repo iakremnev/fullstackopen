@@ -3,14 +3,6 @@ import jwt from 'jsonwebtoken'
 import Blog from '../models/blog.js'
 import User from '../models/user.js'
 
-const extractToken = (authHeader) => {
-  const authScheme = 'Bearer '
-  if (authHeader === undefined || !authHeader.startsWith(authScheme)) {
-    return null
-  }
-  return authHeader.slice(authScheme.length)
-}
-
 const blogsRouter = express.Router()
 
 blogsRouter.get('/', async (request, response) => {
@@ -20,19 +12,20 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.post('/', async (request, response) => {
-  const authToken = extractToken(request.header('Authorization'))
-  if (authToken === null) {
+  if (request.token === undefined) {
     return response.sendStatus(403)
   }
 
   let decodedToken = null
   try {
-    decodedToken = jwt.verify(authToken, process.env.JWTSECRET)
+    decodedToken = jwt.verify(request.token, process.env.JWTSECRET)
   } catch (error) {
     if (error.name === 'JsonWebTokenError') {
       return response.sendStatus(403)
     }
   }
+
+  console.log(decodedToken)
 
   const creatorUser = await User.findOne({ username: decodedToken.username })
   const blog = new Blog({ ...request.body, user: creatorUser })

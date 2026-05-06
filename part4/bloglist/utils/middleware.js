@@ -3,6 +3,23 @@ import logger from './logger.js'
 
 const requestLogger = morgan('tiny')
 
+const tokenExtractor = (request, response, next) => {
+  const extractToken = (authHeader) => {
+    const authScheme = 'Bearer '
+    if (authHeader === undefined || !authHeader.startsWith(authScheme)) {
+      return null
+    }
+    return authHeader.slice(authScheme.length)
+  }
+
+  const token = extractToken(request.header('Authorization'))
+  if (token !== null) {
+    request.token = token
+  }
+
+  next()
+}
+
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
 
@@ -17,5 +34,4 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-
-export default { requestLogger, errorHandler }
+export default { requestLogger, tokenExtractor, errorHandler }

@@ -76,3 +76,7 @@ Implement token-based authentication
 ## Exercise 4.19
 
 Require token authentication when adding a new blog. Authenticated user is the creator of the blog.
+
+## Exercise 4.20
+
+Refactor token extraction into a middleware
