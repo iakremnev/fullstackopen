@@ -68,3 +68,7 @@ Restrict creating new users: username and password must be at least 3 chars long
 ## Exercise 4.17
 
 Link blog to a user. When a new blog is created, any existing user is assigned as its creator.
+
+## Exercise 4.18
+
+Implement token-based authentication
