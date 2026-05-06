@@ -72,3 +72,7 @@ Link blog to a user. When a new blog is created, any existing user is assigned a
 ## Exercise 4.18
 
 Implement token-based authentication
+
+## Exercise 4.19
+
+Require token authentication when adding a new blog. Authenticated user is the creator of the blog.
