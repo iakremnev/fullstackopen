@@ -60,3 +60,7 @@ Implement functionality for updating the information of an individual blog post.
 ## Exercise 4.15
 
 Add User model. Add endpoint for user creation. Add endpoint for getting all users.
+
+## Exercise 4.16
+
+Restrict creating new users: username and password must be at least 3 chars long, username must be unique.
