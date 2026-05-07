@@ -56,6 +56,12 @@ const singleUser = {
   name: 'Henry Shultz'
 }
 
+const singleUser2 = {
+  username: 'ololo31',
+  password: 'Stupid!35',
+  name: 'Larry Oswald'
+}
+
 const userWithShortUsername = {
   username: 'ai',
   password: 'dmpoewmf',
@@ -76,6 +82,7 @@ export default {
   blogWithoutTitle,
   allBlogsInDB,
   singleUser,
+  singleUser2,
   userWithShortUsername,
   userWithShortPassword
 }

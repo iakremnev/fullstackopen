@@ -1,7 +1,5 @@
 import express from 'express'
-import jwt from 'jsonwebtoken'
 import Blog from '../models/blog.js'
-import User from '../models/user.js'
 
 const blogsRouter = express.Router()
 
@@ -13,13 +11,13 @@ blogsRouter.get('/', async (request, response) => {
 
 blogsRouter.post('/', async (request, response) => {
   const user = request.user
-  if (user === undefined) {
-    return response.sendStatus(403)
+  if (!user) {
+    return response.sendStatus(401)
   }
 
   const blog = new Blog({ ...request.body, user })
-  const addedBlog = await blog.save()
   user.blogs.push(blog)
+  const addedBlog = await blog.save()
   await user.save()
   response.status(201).json(addedBlog)
 })
@@ -27,7 +25,7 @@ blogsRouter.post('/', async (request, response) => {
 blogsRouter.delete('/:id', async (request, response) => {
   const user = request.user
   if (user === undefined) {
-    return response.sendStatus(403)
+    return response.sendStatus(401)
   }
 
   const blog = await Blog.findById(request.params.id)
@@ -43,11 +41,24 @@ blogsRouter.delete('/:id', async (request, response) => {
 })
 
 blogsRouter.put('/:id', async (request, response) => {
+  const user = request.user
+  if (!user) {
+    return response.sendStatus(401)
+  }
+  const blog = await Blog.findById(request.params.id)
+  if (blog === null) {
+    return response.sendStatus(404)
+  }
+  if (blog.user.toString() !== user._id.toString()) {
+    return response.sendStatus(403)
+  }
+
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,
-    request.body,
+    { ...request.body, user },
     { returnDocument: 'after' }
-  )
+  ).populate('user', { username: 1, name: 1 })
+
   response.status(200).json(updatedBlog)
 })
 

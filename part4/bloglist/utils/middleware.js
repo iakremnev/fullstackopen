@@ -26,9 +26,9 @@ const userExtractor = async (request, response, next) => {
   if (request.token !== undefined) {
     const decoded = jwt.verify(request.token, process.env.JWTSECRET)
     const user = await User.findById(decoded.id)
-    if (user === null) {
+    if (!user) {
       console.log(`User id not found: ${decoded.id}`)
-      response.sendStatus(403)
+      return response.sendStatus(403)
     }
     request.user = user
   }
