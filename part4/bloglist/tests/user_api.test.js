@@ -41,7 +41,7 @@ describe.only('When user is added', () => {
   })
 
   test('can\'t add another user with the same username', async () => {
-    const firstResponse = await api
+    await api
       .post('/api/users')
       .send(helper.singleUser)
       .expect(201)

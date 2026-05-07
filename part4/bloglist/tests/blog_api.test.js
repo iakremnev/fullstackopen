@@ -5,7 +5,6 @@ import app from '../app.js'
 import Blog from '../models/blog.js'
 import helper from './test_helper.js'
 import mongoose from 'mongoose'
-import logger from '../utils/logger.js'
 
 const api = supertest(app)
 
