@@ -48,7 +48,7 @@ describe('Fetch blogs from DB', () => {
   })
 })
 
-describe.only('Add new blog post', () => {
+describe('Add new blog post', () => {
 
   beforeEach(async () => {
     await Blog.deleteMany({})
@@ -61,7 +61,7 @@ describe.only('Add new blog post', () => {
       .expect(401)
   })
 
-  test.only('contents is identical', async () => {
+  test('contents is identical', async () => {
     const response = await api
       .post('/api/blogs')
       .set('Authorization', `Bearer ${token}`)
@@ -190,7 +190,7 @@ describe('when updating an individual blog post', async () => {
     assert.strictEqual(totalAfterUpdate, totalBeforeUpdate)
   })
 
-  test.only('contents is identical', async () => {
+  test('contents is identical', async () => {
     let response = await api
       .post('/api/blogs')
       .set('Authorization', `Bearer ${token}`)
