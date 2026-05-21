@@ -16,8 +16,12 @@ const App = () => {
 
     const newBlogRef = useRef();
 
+    const blogComparator = (a, b) => b.likes - a.likes;
+
     useEffect(() => {
-        blogService.getAll().then((blogs) => setBlogs(blogs));
+        blogService
+            .getAll()
+            .then((blogs) => setBlogs(blogs.sort(blogComparator)));
     }, []);
 
     useEffect(() => {
@@ -80,8 +84,10 @@ const App = () => {
             },
             user.token,
         );
-        const updatedBlogs = blogs.map((blog) => blog.id === updatedBlog.id ? updatedBlog : blog)
-        setBlogs(updatedBlogs)
+        const updatedBlogs = blogs
+            .map((blog) => (blog.id === updatedBlog.id ? updatedBlog : blog))
+            .sort(blogComparator);
+        setBlogs(updatedBlogs);
     };
 
     if (!user) {

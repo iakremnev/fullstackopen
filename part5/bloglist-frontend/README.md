@@ -31,3 +31,11 @@ Expand and fold each blog entry with a button
 # Exercise 5.8
 
 Implement liking a blog post
+
+# Exercise 5.9
+
+Owner of a blog post isn't showing after liking the post (not relevant)
+
+# Exercise 5.10
+
+Sort the blog posts by the number of likes
