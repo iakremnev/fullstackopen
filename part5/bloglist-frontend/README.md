@@ -7,3 +7,7 @@ If a user is logged in, present their name and a list of blogs.
 # Exercise 5.2
 
 Make login persistent with local storage. Add logout functionality.
+
+# Exercise 5.3
+
+Allow logged in users to create new blog entries

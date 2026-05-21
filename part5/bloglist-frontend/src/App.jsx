@@ -3,6 +3,7 @@ import Blog from "./components/Blog";
 import LoginForm from "./components/LoginForm";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
+import CreateBlogForm from "./components/CreateBlogForm";
 
 const LOGIN_LS_KEY = "login";
 
@@ -32,19 +33,28 @@ const App = () => {
         window.localStorage.removeItem(LOGIN_LS_KEY);
     };
 
+    const handleCreateNewBlog = async (blog) => {
+      const response = await blogService.createBlog(blog, user.token)
+      console.log(response)
+    }
+
+    if (!user) {
+        return (
+            <div>
+                <h2>blogs</h2>
+                <LoginForm handleLogin={handleLogin} />
+            </div>
+        );
+    }
     return (
         <div>
             <h2>blogs</h2>
-            {!user && <LoginForm handleLogin={handleLogin} />}
-            {user && (
-                <>
-                    <p>{user.name} logged in</p>
-                    <button onClick={handleLogout}>log out</button>
-                    {blogs.map((blog) => (
-                        <Blog key={blog.id} blog={blog} />
-                    ))}
-                </>
-            )}
+            <p>{user.name} logged in</p>
+            <button onClick={handleLogout}>log out</button>
+            <CreateBlogForm handleCreateNewBlog={handleCreateNewBlog} />
+            {blogs.map((blog) => (
+                <Blog key={blog.id} blog={blog} />
+            ))}
         </div>
     );
 };
