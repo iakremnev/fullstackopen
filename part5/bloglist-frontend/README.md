@@ -27,3 +27,7 @@ Move state of the blog form into the blog form component (already done)
 # Exercise 5.7
 
 Expand and fold each blog entry with a button
+
+# Exercise 5.8
+
+Implement liking a blog post
