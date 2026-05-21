@@ -48,7 +48,8 @@ const App = () => {
 
     const handleCreateNewBlog = async (blog) => {
         try {
-            await blogService.createBlog(blog, user.token);
+            const response = await blogService.createBlog(blog, user.token);
+            setBlogs(blogs.concat(response))
             setNotification({
                 status: "success",
                 message: `New blog "${blog.title}" by ${blog.author} was added`,

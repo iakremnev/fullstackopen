@@ -7,8 +7,7 @@ const getAll = async () => {
 }
 
 const createBlog = async (blog, authToken) => {
-  console.log('Send blog', blog)
-  const response = axios.post(baseUrl, blog, {
+  const response = await axios.post(baseUrl, blog, {
     headers: {
       'Authorization': `Bearer ${authToken}`
     }
