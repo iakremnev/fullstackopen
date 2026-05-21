@@ -11,3 +11,7 @@ Make login persistent with local storage. Add logout functionality.
 # Exercise 5.3
 
 Allow logged in users to create new blog entries
+
+# Exercise 5.4
+
+Implement notifications about successful and failed operations (add blog, login)
