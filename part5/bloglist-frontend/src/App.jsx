@@ -90,6 +90,14 @@ const App = () => {
         setBlogs(updatedBlogs);
     };
 
+    const handleDeleteFor = async (blog) => {
+      if (confirm(`Remove blog "${blog.title}" by ${blog.author}`)) {
+        const deleteId = blog.id
+        await blogService.deleteBlog(deleteId, user.token)
+        setBlogs(blogs.filter((blog) => blog.id !== deleteId))
+      }
+    }
+
     if (!user) {
         return (
             <div>
@@ -123,6 +131,7 @@ const App = () => {
                     key={blog.id}
                     blog={blog}
                     handleLike={() => handleLikeFor(blog)}
+                    handleDelete={() => handleDeleteFor(blog)}
                 />
             ))}
         </div>

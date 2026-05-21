@@ -39,3 +39,7 @@ Owner of a blog post isn't showing after liking the post (not relevant)
 # Exercise 5.10
 
 Sort the blog posts by the number of likes
+
+# Exercise 5.11
+
+Implement deleting a blog post
