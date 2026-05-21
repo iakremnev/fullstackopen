@@ -8,6 +8,9 @@ const CreateBlogForm = ({ handleCreateNewBlog }) => {
     const handleSubmit = async (event) => {
       event.preventDefault()
       await handleCreateNewBlog({ title, author, url })
+      setTitle('')
+      setAuthor('')
+      setUrl('')
     }
     return (
         <div>
