@@ -4,6 +4,8 @@ import LoginForm from "./components/LoginForm";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 
+const LOGIN_LS_KEY = "login";
+
 const App = () => {
     const [blogs, setBlogs] = useState([]);
     const [user, setUser] = useState(null);
@@ -12,10 +14,22 @@ const App = () => {
         blogService.getAll().then((blogs) => setBlogs(blogs));
     }, []);
 
+    useEffect(() => {
+        const loginData = window.localStorage.getItem(LOGIN_LS_KEY);
+        if (loginData) {
+            setUser(JSON.parse(loginData));
+        }
+    }, []);
+
     const handleLogin = async (username, password) => {
-        console.log(`Username: ${username}, password: ${password}`);
-        const userData = await loginService.login(username, password);
-        setUser(userData);
+        const loginData = await loginService.login(username, password);
+        setUser(loginData);
+        window.localStorage.setItem(LOGIN_LS_KEY, JSON.stringify(loginData));
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        window.localStorage.removeItem(LOGIN_LS_KEY);
     };
 
     return (
@@ -25,6 +39,7 @@ const App = () => {
             {user && (
                 <>
                     <p>{user.name} logged in</p>
+                    <button onClick={handleLogout}>log out</button>
                     {blogs.map((blog) => (
                         <Blog key={blog.id} blog={blog} />
                     ))}
