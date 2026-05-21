@@ -15,3 +15,7 @@ Allow logged in users to create new blog entries
 # Exercise 5.4
 
 Implement notifications about successful and failed operations (add blog, login)
+
+# Exercise 5.5
+
+Add togglable feature to the new blog form. Hide the form after submitting a new blog.
