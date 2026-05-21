@@ -19,3 +19,11 @@ Implement notifications about successful and failed operations (add blog, login)
 # Exercise 5.5
 
 Add togglable feature to the new blog form. Hide the form after submitting a new blog.
+
+# Exercise 5.6
+
+Move state of the blog form into the blog form component (already done)
+
+# Exercise 5.7
+
+Expand and fold each blog entry with a button
