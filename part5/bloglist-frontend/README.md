@@ -43,3 +43,7 @@ Sort the blog posts by the number of likes
 # Exercise 5.11
 
 Implement deleting a blog post
+
+# Exercise 5.12
+
+Lint
