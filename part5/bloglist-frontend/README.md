@@ -59,3 +59,7 @@ Test: Blog component renders url and number of likes when a button is clicked
 # Exercise 5.15
 
 Test: like button clicking
+
+# Exercise 5.16
+
+Test: test new blog form
