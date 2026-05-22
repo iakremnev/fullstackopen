@@ -47,3 +47,7 @@ Implement deleting a blog post
 # Exercise 5.12
 
 Lint
+
+# Exercise 5.13
+
+Test: Blog component renders title and author by default but not URL or number of likes
