@@ -12,24 +12,17 @@ const Blog = ({ blog, handleLike, handleDelete }) => {
     marginBottom: 5
   }
 
-  if (!expanded) {
-    return <div style={blogStyle}>
-      <span>{blog.title}</span>
-      <span>{blog.author}</span>
-      <button onClick={toggleExpanded}>Show</button>
-    </div>
-  }
+  const showOnExpand = { display: expanded ? 'block' : 'none' }
+
   return (
     <div style={blogStyle}>
-      <div>
-        <span>{blog.title}</span>
-        <span>{blog.author}</span>
-        <button onClick={toggleExpanded}>Hide</button>
-      </div>
-      <div>{blog.url}</div>
-      <div>likes {blog.likes} <button onClick={handleLike}>like</button></div>
-      <div>{blog.user?.name}</div>
-      <div><button onClick={handleDelete}>Remove</button></div>
+      <span>{blog.title}</span>
+      <span>{blog.author}</span>
+      <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>
+      <div style={showOnExpand}>{blog.url}</div>
+      <div style={showOnExpand}>likes {blog.likes} <button onClick={handleLike}>like</button></div>
+      <div style={showOnExpand}>{blog.user?.name}</div>
+      <div style={showOnExpand}><button onClick={handleDelete}>Remove</button></div>
     </div>
   )
 }

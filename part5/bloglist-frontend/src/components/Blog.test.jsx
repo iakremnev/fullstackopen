@@ -14,8 +14,8 @@ describe('<Blog />', () => {
     render(<Blog blog={blog}/>)
     const titleElement = screen.getByText(blog.title)
     const authorElement = screen.getByText(blog.author)
-    const urlElememnt = screen.queryByText(blog.url)
-    const likesElement = screen.queryByText(`likes ${blog.likes}`)
+    const urlElememnt = screen.getByText(blog.url)
+    const likesElement = screen.getByText(`likes ${blog.likes}`)
 
     expect(titleElement).toBeVisible()
     expect(authorElement).toBeVisible()
