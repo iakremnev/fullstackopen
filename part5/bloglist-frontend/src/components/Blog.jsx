@@ -14,14 +14,16 @@ const Blog = ({ blog, handleLike, handleDelete }) => {
 
   if (!expanded) {
     return <div style={blogStyle}>
-      {blog.title} {blog.author}
+      <span>{blog.title}</span>
+      <span>{blog.author}</span>
       <button onClick={toggleExpanded}>Show</button>
     </div>
   }
   return (
     <div style={blogStyle}>
       <div>
-        {blog.title} {blog.author}
+        <span>{blog.title}</span>
+        <span>{blog.author}</span>
         <button onClick={toggleExpanded}>Hide</button>
       </div>
       <div>{blog.url}</div>
