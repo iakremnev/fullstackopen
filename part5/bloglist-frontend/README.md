@@ -55,3 +55,7 @@ Test: Blog component renders title and author by default but not URL or number o
 # Exercise 5.14
 
 Test: Blog component renders url and number of likes when a button is clicked
+
+# Exercise 5.15
+
+Test: like button clicking

@@ -37,4 +37,21 @@ describe('<Blog />', () => {
     expect(urlElememnt).toBeVisible()
     expect(likesElement).toBeVisible()
   })
+
+  test('like button can be clicked successively', async () => {
+    const user = userEvent.setup()
+    const mockHandler = vi.fn()
+
+    render(<Blog blog={blog} handleLike={mockHandler}/>)
+
+    // 1. Expand the blog
+    const showButton = screen.getByText('Show')
+    await user.click(showButton)
+    // 2. Click like twice
+    const likeButton = screen.getByText('like')
+    await user.click(likeButton)
+    await user.click(likeButton)
+
+    expect(mockHandler.mock.calls).toHaveLength(2)
+  })
 })
