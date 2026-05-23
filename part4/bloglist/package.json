@@ -10,7 +10,8 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development node --env-file=env/dev.env --watch index.js",
     "test": "NODE_ENV=test node --env-file=env/test.env --test",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "start:test": "NODE_ENV=test node --env-file=env/test.env --watch index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

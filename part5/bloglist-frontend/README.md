@@ -50,7 +50,7 @@ Lint
 
 # Exercise 5.13
 
-Test: Blog component renders title and author by default but not URL or number of likes
+Test (vitest): Blog component renders title and author by default but not URL or number of likes
 
 # Exercise 5.14
 
