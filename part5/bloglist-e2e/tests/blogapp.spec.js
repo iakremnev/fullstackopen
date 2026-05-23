@@ -2,7 +2,8 @@ import { test, expect, beforeEach, describe } from '@playwright/test'
 import testHelper from './helper.js'
 
 describe('Blog app', () => {
-  beforeEach(async ({ page }) => {
+  beforeEach(async ({ request, page }) => {
+    await testHelper.resetDB(request)
     await page.goto('http://localhost:5173')
   })
 
@@ -13,7 +14,6 @@ describe('Blog app', () => {
 
   describe('login', () => {
     beforeEach(async ({request}) => {
-      await testHelper.resetDB(request)
       await testHelper.createTestUser(request)
     })
 
@@ -31,7 +31,6 @@ describe('Blog app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({page, request}) => {
-      await testHelper.resetDB(request)
       await testHelper.createTestUser(request)
       await testHelper.loginWith(page, testHelper.testUser.username, testHelper.testUser.password)
     })
