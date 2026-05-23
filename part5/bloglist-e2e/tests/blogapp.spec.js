@@ -60,5 +60,22 @@ describe('Blog app', () => {
 
       expect(blogDiv.getByText('likes 1')).toBeDefined()
     })
+
+    test('a blog can be deleted by its creator', async ({page}) => {
+      const blog = {
+        title: 'Delete me, oh creator',
+        author: 'Myself',
+        url: 'https://blogpost.com/randomslugs/3242'
+      }
+      await testHelper.createBlog(page, blog.title, blog.author, blog.url)
+
+      const blogDiv = page.getByText(`${blog.title}${blog.author}`)
+      await blogDiv.getByText('Show').click()
+
+      page.on('dialog', (dialog) => dialog.accept())
+      await blogDiv.getByText('Remove').click()
+
+      expect(page.getByText(`${blog.title}${blog.author}`)).not.toBeVisible()
+    })
   })
 })

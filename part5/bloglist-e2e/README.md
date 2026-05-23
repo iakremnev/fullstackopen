@@ -13,3 +13,7 @@ Test: logged in user can create a new blog post
 # Exercise 5.20
 
 Test: blog can be liked
+
+# Exercise 5.21
+
+Test: blog can be removed by its creator
