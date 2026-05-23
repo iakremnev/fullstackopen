@@ -12,8 +12,9 @@ const LoginForm = ({ handleLogin }) => {
   }
 
   return (
-    <div>
+    <div className='login-form'>
       <form type="submit" onSubmit={handleSubmit}>
+        <h2>Login</h2>
         <div>
           <label>
                         username:
