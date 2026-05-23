@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     blogService
       .getAll()
-      .then((blogs) => setBlogs(blogs.sort(blogComparator)))
+      .then((blogs) => setBlogs(blogs))
   }, [])
 
   useEffect(() => {

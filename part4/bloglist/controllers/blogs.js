@@ -15,7 +15,7 @@ blogsRouter.post('/', async (request, response) => {
     return response.sendStatus(401)
   }
 
-  const blog = new Blog({ ...request.body, user })
+  const blog = new Blog({ ...request.body, user: user.id })
   user.blogs.push(blog)
   const addedBlog = await blog.save()
   await user.save()
