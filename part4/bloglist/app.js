@@ -5,6 +5,7 @@ import config from './utils/config.js'
 import blogsRouter from './controllers/blogs.js'
 import loginRouter from './controllers/login.js'
 import usersRouter from './controllers/users.js'
+import testingRouter from './controllers/testing.js'
 import logger from './utils/logger.js'
 import middleware from './utils/middleware.js'
 
@@ -23,12 +24,16 @@ mongoose
 
 app.use(express.static('dist'))
 app.use(express.json())
-// app.use(middleware.requestLogger)
+app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
+
+if (process.env.NODE_ENV === 'test') {
+  app.use('/api/testing', testingRouter)
+}
 
 app.use(middleware.errorHandler)
 
