@@ -9,3 +9,7 @@ Test: successful and failed login
 # Exercise 5.19
 
 Test: logged in user can create a new blog post
+
+# Exercise 5.20
+
+Test: blog can be liked

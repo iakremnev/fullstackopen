@@ -18,4 +18,12 @@ const loginWith = async (page, username, password) => {
   await page.getByText('Sign In').click()
 }
 
-export default { testUser, createTestUser, resetDB, loginWith };
+const createBlog = async (page, title, author, url) => {
+  await page.getByText('Add new blog').click()
+  await page.getByLabel('title:').fill(title)
+  await page.getByLabel('author:').fill(author)
+  await page.getByLabel('url:').fill(url)
+  await page.getByText('Create').click()
+}
+
+export default { testUser, createTestUser, resetDB, loginWith, createBlog };

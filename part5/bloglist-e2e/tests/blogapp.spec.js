@@ -42,13 +42,24 @@ describe('Blog app', () => {
         author: 'Joseph Griffin',
         url: 'https://blogpost.com/josephgr/324-consumerism'
       }
-      await page.getByText('Add new blog').click()
-      await page.getByLabel('title:').fill(blog.title)
-      await page.getByLabel('author:').fill(blog.author)
-      await page.getByLabel('url:').fill(blog.url)
-      await page.getByText('Create').click()
+      await testHelper.createBlog(page, blog.title, blog.author, blog.url)
 
       await expect(page.getByText(`${blog.title}${blog.author}`)).toBeVisible()
+    })
+
+    test('a blog can be liked', async ({page}) => {
+      const blog = {
+        title: 'Like my Blog!',
+        author: 'Rudy Phillips',
+        url: 'https://blogpost.com/rudyph/35-like-me'
+      }
+      await testHelper.createBlog(page, blog.title, blog.author, blog.url)
+
+      const blogDiv = page.getByText(`${blog.title}${blog.author}`)
+      await blogDiv.getByText('Show').click()
+      await blogDiv.getByText('like', {exact: true}).click()
+
+      expect(blogDiv.getByText('likes 1')).toBeDefined()
     })
   })
 })
