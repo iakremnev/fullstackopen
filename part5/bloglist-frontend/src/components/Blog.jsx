@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, handleLike, handleDelete }) => {
+const Blog = ({ blog, allowDelete, handleLike, handleDelete }) => {
   const [expanded, setExpanded] = useState(false)
   const toggleExpanded = () => setExpanded(!expanded)
 
@@ -13,6 +13,7 @@ const Blog = ({ blog, handleLike, handleDelete }) => {
   }
 
   const showOnExpand = { display: expanded ? 'block' : 'none' }
+  const showOnExpandIfAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
 
   return (
     <div style={blogStyle}>
@@ -22,7 +23,7 @@ const Blog = ({ blog, handleLike, handleDelete }) => {
       <div style={showOnExpand}>{blog.url}</div>
       <div style={showOnExpand}>likes {blog.likes} <button onClick={handleLike}>like</button></div>
       <div style={showOnExpand}>{blog.user?.name}</div>
-      <div style={showOnExpand}><button onClick={handleDelete}>Remove</button></div>
+      <div style={showOnExpandIfAllowed}><button onClick={handleDelete}>Remove</button></div>
     </div>
   )
 }

@@ -133,6 +133,7 @@ const App = () => {
           blog={blog}
           handleLike={() => handleLikeFor(blog)}
           handleDelete={() => handleDeleteFor(blog)}
+          allowDelete={user.username === blog.user?.username}
         />
       ))}
     </div>
