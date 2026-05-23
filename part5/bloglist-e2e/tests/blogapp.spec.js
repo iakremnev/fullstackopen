@@ -33,6 +33,7 @@ describe('Blog app', () => {
     beforeEach(async ({page, request}) => {
       await testHelper.createTestUser(request)
       await testHelper.loginWith(page, testHelper.testUser.username, testHelper.testUser.password)
+      await expect(page.getByText(`${testHelper.testUser.name} logged in`)).toBeVisible()
     })
 
     test('a new blog can be created', async ({page}) => {
@@ -75,7 +76,17 @@ describe('Blog app', () => {
       page.on('dialog', (dialog) => dialog.accept())
       await blogDiv.getByText('Remove').click()
 
-      expect(page.getByText(`${blog.title}${blog.author}`)).not.toBeVisible()
+      await expect(page.getByText(`${blog.title}${blog.author}`)).not.toBeVisible()
+    })
+
+    test('cannot delete other\'s blogs', async ({request, page}) => {
+      const otherBlog = testHelper.anonymousBlogs[0]
+      await testHelper.createAnonymousBlog(request, otherBlog)
+
+      await page.reload()
+      const otherBlogDiv = page.getByText(`${otherBlog.title}${otherBlog.author}`)
+      await otherBlogDiv.getByText('Show').click()
+      await expect(otherBlogDiv.getByText('Remove')).not.toBeVisible()
     })
   })
 })

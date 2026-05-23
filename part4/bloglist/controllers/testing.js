@@ -11,4 +11,10 @@ testingRouter.post('/reset', async (request, response) => {
   response.sendStatus(204).end()
 })
 
+testingRouter.post('/anonymousblog', async (request, response) => {
+  const blog = Blog({ ...request.body, user: null })
+  await blog.save()
+  response.status(201).json(blog)
+})
+
 export default testingRouter

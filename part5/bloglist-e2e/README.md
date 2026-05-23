@@ -17,3 +17,7 @@ Test: blog can be liked
 # Exercise 5.21
 
 Test: blog can be removed by its creator
+
+# Exercise 5.22
+
+Test: only the user who added the blog sees blog's delete button
