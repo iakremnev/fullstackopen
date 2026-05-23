@@ -21,3 +21,7 @@ Test: blog can be removed by its creator
 # Exercise 5.22
 
 Test: only the user who added the blog sees blog's delete button
+
+# Exercise 5.23
+
+Test: blogs are sorted by number of likes

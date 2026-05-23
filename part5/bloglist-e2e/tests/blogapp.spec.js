@@ -88,5 +88,23 @@ describe('Blog app', () => {
       await otherBlogDiv.getByText('Show').click()
       await expect(otherBlogDiv.getByText('Remove')).not.toBeVisible()
     })
+
+    test('blogs are sorted in likes order', async ({request, page}) => {
+      await Promise.all(testHelper.anonymousBlogs.map(async (blog) => {
+        await testHelper.createAnonymousBlog(request, blog)
+      }))
+
+      await page.reload({waitUntil: 'domcontentloaded'})
+      await page.locator('.blog').first().waitFor()
+      const blogDivs = await page.locator(".blog").all()
+      const likeValues = await Promise.all(blogDivs.map(async (div) => {
+        await div.getByText('Show').click()
+        const likesText = await div.getByText(/likes \d+/).textContent()
+        return parseInt(likesText.replace('likes ', ''))
+      }))
+
+      expect(likeValues).toHaveLength(testHelper.anonymousBlogs.length)
+      expect(likeValues).toStrictEqual(likeValues.toSorted((a, b) => b - a))
+    })
   })
 })

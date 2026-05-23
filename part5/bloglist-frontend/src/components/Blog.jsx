@@ -16,7 +16,7 @@ const Blog = ({ blog, allowDelete, handleLike, handleDelete }) => {
   const showOnExpandIfAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
 
   return (
-    <div style={blogStyle}>
+    <div className='blog' style={blogStyle}>
       <span>{blog.title}</span>
       <span>{blog.author}</span>
       <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>
