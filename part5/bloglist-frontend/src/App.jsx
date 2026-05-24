@@ -5,11 +5,13 @@ import NavigationBar from './components/NavigationBar.jsx'
 import LoginForm from './components/LoginForm'
 import BlogList from './components/BlogList.jsx'
 import Blog from './components/Blog.jsx'
+import CreateBlogForm from './components/CreateBlogForm.jsx'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
 
 import utils from './utils.js'
+import RequiresAuthentication from './components/RequiredAuthenication.jsx'
 
 const LOGIN_LS_KEY = 'login'
 
@@ -30,13 +32,10 @@ const App = () => {
     ? blogs.find(blog => blog.id === match.params.id)
     : null
 
-  /*
-  const newBlogRef = useRef()
   const handleCreateNewBlog = async (blog) => {
     try {
       const response = await blogService.createBlog(blog, user.token)
       setBlogs(blogs.concat(response))
-      newBlogRef.current.toggleVisibility()
       setNotification({
         status: 'success',
         message: `New blog "${blog.title}" by ${blog.author} was added`,
@@ -50,7 +49,7 @@ const App = () => {
       setTimeout(() => setNotification(null), 4000)
     }
   }
-  */
+
 
   const handleDeleteFor = async (blog) => {
     if (confirm(`Remove blog "${blog.title}" by ${blog.author}`)) {
@@ -132,6 +131,11 @@ const App = () => {
             handleLike={async () => await handleLikeFor(blog)}
             handleDelete={async () => await handleDeleteFor(blog)}
           />
+        }/>
+        <Route path='/create' element={
+          <RequiresAuthentication user={user}>
+            <CreateBlogForm notification={notification} handleCreateNewBlog={handleCreateNewBlog}/>
+          </RequiresAuthentication>
         }/>
       </Routes>
     </div>

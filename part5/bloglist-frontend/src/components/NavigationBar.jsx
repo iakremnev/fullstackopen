@@ -17,6 +17,7 @@ const NavigationBar = ({ user, handleLogout }) => {
   return (
     <div>
       <Link style={padding} to="/">blogs</Link>
+      {user && <Link style={padding} to='/create'>new blog</Link>}
       {!user && <Link style={padding} to="/login">login</Link>}
       {user && logoutButton()}
     </div>

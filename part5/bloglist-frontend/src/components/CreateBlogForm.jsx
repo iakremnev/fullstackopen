@@ -1,19 +1,26 @@
 import { useState } from 'react'
+import Notification from './Notification'
+import { useNavigate } from 'react-router-dom'
 
-const CreateBlogForm = ({ handleCreateNewBlog }) => {
+const CreateBlogForm = ({ notification, handleCreateNewBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     await handleCreateNewBlog({ title, author, url })
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    // setTitle('')
+    // setAuthor('')
+    // setUrl('')
+    navigate('/')
   }
   return (
     <div>
+      <h2>Create new blog</h2>
+      {notification && <Notification message={notification.message} status={notification.status}/>}
       <form type="submit" onSubmit={handleSubmit}>
         <label>
                 title:

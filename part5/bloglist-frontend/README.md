@@ -71,3 +71,7 @@ Add React Router with root and `/login`. Blogs (root) and login/logout must be p
 # Exercsie 5.25
 
 Move detailed blog view to `/blog/:id`
+
+# Exercise 5.26
+
+Create a new view for creating a new blog at `/create`
