@@ -82,3 +82,12 @@ Update the unit tests for the single blog view:
 * Blog info and number of likes are displayed to unauthenticated users, buttons are not displayed
 * Authenticated users who are not the blog's creator are show only the like button
 * The blog's creator is also show the delete button
+
+# Exercise 5.28
+
+Rewrite playwright tests:
+* Login succeeds with correct username and password
+* Login fails with incorrect username or password
+* A logged-in user can create a blog
+* A logged-in user can like blogs
+* A logged-in user can delete their blog

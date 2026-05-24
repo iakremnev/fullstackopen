@@ -14,10 +14,9 @@ const LoginForm = ({ notification, handleLogin }) => {
 
   return (
     <div className='login-form'>
-      <h2>Sign in to blog app</h2>
+      <h2>Login</h2>
       {notification && <Notification message={notification.message} status={notification.status}/>}
       <form type="submit" onSubmit={handleSubmit}>
-        <h2>Login</h2>
         <div>
           <label>
             username:

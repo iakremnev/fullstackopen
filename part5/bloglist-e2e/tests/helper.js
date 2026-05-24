@@ -44,11 +44,10 @@ const loginWith = async (page, username, password) => {
 };
 
 const createBlog = async (page, title, author, url) => {
-    await page.getByText("Add new blog").click();
     await page.getByLabel("title:").fill(title);
     await page.getByLabel("author:").fill(author);
     await page.getByLabel("url:").fill(url);
-    await page.getByText("Create").click();
+    await page.getByText("Create", {exact: true}).click();
 };
 
 export default {
