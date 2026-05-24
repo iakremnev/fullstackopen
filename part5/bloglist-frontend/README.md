@@ -63,3 +63,7 @@ Test: like button clicking
 # Exercise 5.16
 
 Test: test new blog form
+
+# Exercise 5.24
+
+Add React Router with root and /login. Blogs (root) and login/logout must be present in the navigation bar.

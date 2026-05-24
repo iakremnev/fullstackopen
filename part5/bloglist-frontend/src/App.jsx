@@ -1,28 +1,58 @@
-import { useState, useEffect, useRef } from 'react'
-import Blog from './components/Blog'
-import CreateBlogForm from './components/CreateBlogForm'
+import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import NavigationBar from './components/NavigationBar.jsx'
 import LoginForm from './components/LoginForm'
-import Notification from './components/Notification'
-import Togglable from './components/Togglable'
+import BlogList from './components/BlogList.jsx'
+
 import blogService from './services/blogs'
 import loginService from './services/login'
+
+import utils from './utils.js'
 
 const LOGIN_LS_KEY = 'login'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+
   const [user, setUser] = useState(null)
+  const [blogs, setBlogs] = useState([])
   const [notification, setNotification] = useState(null)
-
-  const newBlogRef = useRef()
-
-  const blogComparator = (a, b) => b.likes - a.likes
 
   useEffect(() => {
     blogService
       .getAll()
-      .then((blogs) => setBlogs(blogs.toSorted(blogComparator)))
+      .then((blogs) => setBlogs(blogs.toSorted(utils.blogComparator)))
   }, [])
+
+  /*
+  const newBlogRef = useRef()
+  const handleCreateNewBlog = async (blog) => {
+    try {
+      const response = await blogService.createBlog(blog, user.token)
+      setBlogs(blogs.concat(response))
+      newBlogRef.current.toggleVisibility()
+      setNotification({
+        status: 'success',
+        message: `New blog "${blog.title}" by ${blog.author} was added`,
+      })
+      setTimeout(() => setNotification(null), 4000)
+    } catch (error) {
+      setNotification({
+        status: 'error',
+        message: `Error adding new blog: ${error}`,
+      })
+      setTimeout(() => setNotification(null), 4000)
+    }
+  }
+  */
+
+  const handleDeleteFor = async (blog) => {
+    if (confirm(`Remove blog "${blog.title}" by ${blog.author}`)) {
+      const deleteId = blog.id
+      await blogService.deleteBlog(deleteId, user.token)
+      setBlogs(blogs.filter((blog) => blog.id !== deleteId))
+    }
+  }
 
   useEffect(() => {
     const loginData = window.localStorage.getItem(LOGIN_LS_KEY)
@@ -54,25 +84,6 @@ const App = () => {
     window.localStorage.removeItem(LOGIN_LS_KEY)
   }
 
-  const handleCreateNewBlog = async (blog) => {
-    try {
-      const response = await blogService.createBlog(blog, user.token)
-      setBlogs(blogs.concat(response))
-      newBlogRef.current.toggleVisibility()
-      setNotification({
-        status: 'success',
-        message: `New blog "${blog.title}" by ${blog.author} was added`,
-      })
-      setTimeout(() => setNotification(null), 4000)
-    } catch (error) {
-      setNotification({
-        status: 'error',
-        message: `Error adding new blog: ${error}`,
-      })
-      setTimeout(() => setNotification(null), 4000)
-    }
-  }
-
   const handleLikeFor = async (blog) => {
     const updatedBlog = await blogService.updateBlog(
       blog.id,
@@ -87,56 +98,28 @@ const App = () => {
     )
     const updatedBlogs = blogs
       .map((blog) => (blog.id === updatedBlog.id ? updatedBlog : blog))
-      .sort(blogComparator)
+      .sort(utils.blogComparator)
     setBlogs(updatedBlogs)
   }
 
-  const handleDeleteFor = async (blog) => {
-    if (confirm(`Remove blog "${blog.title}" by ${blog.author}`)) {
-      const deleteId = blog.id
-      await blogService.deleteBlog(deleteId, user.token)
-      setBlogs(blogs.filter((blog) => blog.id !== deleteId))
-    }
-  }
-
-  if (!user) {
-    return (
-      <div>
-        <h2>blogs</h2>
-        {notification && (
-          <Notification
-            status={notification.status}
-            message={notification.message}
-          />
-        )}
-        <LoginForm handleLogin={handleLogin} />
-      </div>
-    )
-  }
   return (
-    <div>
-      <h2>blogs</h2>
-      {notification && (
-        <Notification
-          status={notification.status}
-          message={notification.message}
-        />
-      )}
-      <p>{user.name} logged in</p>
-      <button onClick={handleLogout}>log out</button>
-      <Togglable buttonLabel="Add new blog" ref={newBlogRef}>
-        <CreateBlogForm handleCreateNewBlog={handleCreateNewBlog} />
-      </Togglable>
-      {blogs.map((blog) => (
-        <Blog
-          key={blog.id}
-          blog={blog}
-          handleLike={() => handleLikeFor(blog)}
-          handleDelete={() => handleDeleteFor(blog)}
-          allowDelete={user.username === blog.user?.username}
-        />
-      ))}
-    </div>
+    <Router>
+      <NavigationBar user={user} handleLogout={handleLogout}/>
+      <Routes>
+        <Route path="/" element={
+          <BlogList
+            blogs={blogs}
+            user={user}
+            notification={notification}
+            handleLikeFor={handleLikeFor}
+            handleDeleteFor={handleDeleteFor}
+          />
+        }/>
+        <Route path='/login' element={
+          <LoginForm notification={notification} handleLogin={handleLogin}/>
+        }/>
+      </Routes>
+    </Router>
   )
 }
 

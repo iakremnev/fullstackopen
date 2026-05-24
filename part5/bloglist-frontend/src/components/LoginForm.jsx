@@ -1,23 +1,30 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Notification from './Notification'
 
-const LoginForm = ({ handleLogin }) => {
+const LoginForm = ({ notification, handleLogin }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setUsername('')
     setPassword('')
-    handleLogin(username, password)
+    await handleLogin(username, password)
+    navigate('/')
   }
 
   return (
     <div className='login-form'>
+      <h2>Sign in to blog app</h2>
+      {notification && <Notification message={notification.message} status={notification.status}/>}
       <form type="submit" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div>
           <label>
-                        username:
+            username:
             <input
               type="text"
               value={username}
@@ -29,7 +36,7 @@ const LoginForm = ({ handleLogin }) => {
         </div>
         <div>
           <label>
-                        password:
+            password:
             <input
               type="password"
               value={password}
