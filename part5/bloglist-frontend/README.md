@@ -75,3 +75,10 @@ Move detailed blog view to `/blog/:id`
 # Exercise 5.26
 
 Create a new view for creating a new blog at `/create`
+
+# Exercise 5.27
+
+Update the unit tests for the single blog view:
+* Blog info and number of likes are displayed to unauthenticated users, buttons are not displayed
+* Authenticated users who are not the blog's creator are show only the like button
+* The blog's creator is also show the delete button
