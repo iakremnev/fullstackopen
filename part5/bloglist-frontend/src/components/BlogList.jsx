@@ -1,7 +1,7 @@
-import Blog from './Blog'
+import { Link } from 'react-router-dom'
 import Notification from './Notification'
 
-const BlogList = ({ blogs, user, notification, handleLikeFor, handleDeleteFor }) => {
+const BlogList = ({ blogs, user, notification }) => {
   return (
     <div>
       <h2>blogs</h2>
@@ -12,16 +12,15 @@ const BlogList = ({ blogs, user, notification, handleLikeFor, handleDeleteFor })
         />
       )}
       {user && <p>{user.name} logged in</p>}
-      {blogs.map((blog) => (
-        <Blog
-          key={blog.id}
-          blog={blog}
-          handleLike={() => handleLikeFor(blog)}
-          handleDelete={() => handleDeleteFor(blog)}
-          allowLike={Boolean(user)}
-          allowDelete={user && user.username === blog.user?.username}
-        />
-      ))}
+      <ul>
+        {blogs.map((blog) => (
+          <li className='blog-item' key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>
+              {blog.title} by {blog.author}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

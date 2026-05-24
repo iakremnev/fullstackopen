@@ -66,4 +66,8 @@ Test: test new blog form
 
 # Exercise 5.24
 
-Add React Router with root and /login. Blogs (root) and login/logout must be present in the navigation bar.
+Add React Router with root and `/login`. Blogs (root) and login/logout must be present in the navigation bar.
+
+# Exercsie 5.25
+
+Move detailed blog view to `/blog/:id`

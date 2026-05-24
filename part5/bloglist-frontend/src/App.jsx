@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route, useMatch } from 'react-router-dom'
 
 import NavigationBar from './components/NavigationBar.jsx'
 import LoginForm from './components/LoginForm'
 import BlogList from './components/BlogList.jsx'
+import Blog from './components/Blog.jsx'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -23,6 +24,11 @@ const App = () => {
       .getAll()
       .then((blogs) => setBlogs(blogs.toSorted(utils.blogComparator)))
   }, [])
+
+  const match = useMatch('/blogs/:id')
+  const blog = match
+    ? blogs.find(blog => blog.id === match.params.id)
+    : null
 
   /*
   const newBlogRef = useRef()
@@ -103,7 +109,7 @@ const App = () => {
   }
 
   return (
-    <Router>
+    <div>
       <NavigationBar user={user} handleLogout={handleLogout}/>
       <Routes>
         <Route path="/" element={
@@ -118,8 +124,17 @@ const App = () => {
         <Route path='/login' element={
           <LoginForm notification={notification} handleLogin={handleLogin}/>
         }/>
+        <Route path='/blogs/:id' element={
+          <Blog
+            blog={blog}
+            allowLike={Boolean(user)}
+            allowDelete={user && user.username === blog?.user?.username}
+            handleLike={async () => await handleLikeFor(blog)}
+            handleDelete={async () => await handleDeleteFor(blog)}
+          />
+        }/>
       </Routes>
-    </Router>
+    </div>
   )
 }
 
