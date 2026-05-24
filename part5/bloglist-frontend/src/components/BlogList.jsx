@@ -18,6 +18,7 @@ const BlogList = ({ blogs, user, notification, handleLikeFor, handleDeleteFor })
           blog={blog}
           handleLike={() => handleLikeFor(blog)}
           handleDelete={() => handleDeleteFor(blog)}
+          allowLike={Boolean(user)}
           allowDelete={user && user.username === blog.user?.username}
         />
       ))}

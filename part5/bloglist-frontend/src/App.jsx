@@ -88,7 +88,7 @@ const App = () => {
     const updatedBlog = await blogService.updateBlog(
       blog.id,
       {
-        user: blog.user.id,
+        user: blog.user?.id,
         title: blog.title,
         author: blog.author,
         url: blog.url,

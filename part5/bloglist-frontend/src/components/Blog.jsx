@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, allowDelete, handleLike, handleDelete }) => {
+const Blog = ({ blog, allowLike, allowDelete, handleLike, handleDelete }) => {
   const [expanded, setExpanded] = useState(false)
   const toggleExpanded = () => setExpanded(!expanded)
 
@@ -13,7 +13,8 @@ const Blog = ({ blog, allowDelete, handleLike, handleDelete }) => {
   }
 
   const showOnExpand = { display: expanded ? 'block' : 'none' }
-  const showOnExpandIfAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
+  const showOnExpandIfDeleteAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
+  const showOnExpandIfLikeAllowed = { display: expanded && allowLike ? 'inline flow-root' : 'none' }
 
   return (
     <div className='blog' style={blogStyle}>
@@ -21,9 +22,12 @@ const Blog = ({ blog, allowDelete, handleLike, handleDelete }) => {
       <span>{blog.author}</span>
       <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>
       <div style={showOnExpand}>{blog.url}</div>
-      <div style={showOnExpand}>likes {blog.likes} <button onClick={handleLike}>like</button></div>
+      <div style={showOnExpand}>
+        likes {blog.likes}
+        <button style={showOnExpandIfLikeAllowed} onClick={handleLike}>like</button>
+      </div>
       <div style={showOnExpand}>{blog.user?.name}</div>
-      <div style={showOnExpandIfAllowed}><button onClick={handleDelete}>Remove</button></div>
+      <div style={showOnExpandIfDeleteAllowed}><button onClick={handleDelete}>Remove</button></div>
     </div>
   )
 }
