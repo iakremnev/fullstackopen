@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom"
-
 const Blog = ({ blog, allowLike, allowDelete, handleLike, handleDelete }) => {
 
   if (!blog) {
@@ -27,13 +25,6 @@ const Blog = ({ blog, allowLike, allowDelete, handleLike, handleDelete }) => {
   const showOnExpandIfDeleteAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
   const showOnExpandIfLikeAllowed = { display: expanded && allowLike ? 'inline flow-root' : 'none' }
 
-  const navigate = useNavigate()
-
-  const onDelete = async () => {
-    await handleDelete()
-    navigate('/')
-  }
-
   return (
     <div className='blog'>
       <h2>
@@ -41,13 +32,13 @@ const Blog = ({ blog, allowLike, allowDelete, handleLike, handleDelete }) => {
         <span>{blog.title}</span>
       </h2>
       {/* <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>*/}
-      <div style={showOnExpand}>{blog.url}</div>
+      <div style={showOnExpand} className="blog-url">{blog.url}</div>
       <div style={showOnExpand}>
         likes {blog.likes}
         <button style={showOnExpandIfLikeAllowed} onClick={handleLike}>like</button>
       </div>
       <div style={showOnExpand}>{blog.user?.name}</div>
-      <div style={showOnExpandIfDeleteAllowed}><button onClick={onDelete}>Remove</button></div>
+      <div style={showOnExpandIfDeleteAllowed}><button onClick={handleDelete}>Remove</button></div>
     </div>
   )
 }

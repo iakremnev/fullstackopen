@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, useMatch } from 'react-router-dom'
+import { Routes, Route, useMatch, useNavigate } from 'react-router-dom'
 
 import NavigationBar from './components/NavigationBar.jsx'
 import LoginForm from './components/LoginForm'
@@ -32,6 +32,8 @@ const App = () => {
     ? blogs.find(blog => blog.id === match.params.id)
     : null
 
+  const navigate = useNavigate()
+
   const handleCreateNewBlog = async (blog) => {
     try {
       const response = await blogService.createBlog(blog, user.token)
@@ -41,6 +43,7 @@ const App = () => {
         message: `New blog "${blog.title}" by ${blog.author} was added`,
       })
       setTimeout(() => setNotification(null), 4000)
+      navigate('/')
     } catch (error) {
       setNotification({
         status: 'error',
@@ -56,6 +59,7 @@ const App = () => {
       const deleteId = blog.id
       await blogService.deleteBlog(deleteId, user.token)
       setBlogs(blogs.filter((blog) => blog.id !== deleteId))
+      navigate('/')
     }
   }
 
@@ -74,6 +78,7 @@ const App = () => {
         LOGIN_LS_KEY,
         JSON.stringify(loginData),
       )
+      navigate('/')
     } catch (error) {
       console.log(error)
       setNotification({
@@ -87,6 +92,7 @@ const App = () => {
   const handleLogout = () => {
     setUser(null)
     window.localStorage.removeItem(LOGIN_LS_KEY)
+    navigate('/')
   }
 
   const handleLikeFor = async (blog) => {

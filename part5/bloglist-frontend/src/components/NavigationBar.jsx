@@ -1,14 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const NavigationBar = ({ user, handleLogout }) => {
 
-  const navigate = useNavigate()
-  const onLogout = () => {
-    handleLogout()
-    navigate('/')
-  }
   const logoutButton = () => {
-    return <button onClick={onLogout}>Sign Out</button>
+    return <button onClick={handleLogout}>Sign Out</button>
   }
 
   const padding = { padding: 5 }

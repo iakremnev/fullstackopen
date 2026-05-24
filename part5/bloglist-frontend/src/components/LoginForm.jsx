@@ -1,19 +1,15 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Notification from './Notification'
 
 const LoginForm = ({ notification, handleLogin }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigate = useNavigate()
-
   const handleSubmit = async (event) => {
     event.preventDefault()
     setUsername('')
     setPassword('')
     await handleLogin(username, password)
-    navigate('/')
   }
 
   return (
