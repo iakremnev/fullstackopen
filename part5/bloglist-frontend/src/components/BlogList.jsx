@@ -3,8 +3,9 @@ import Notification from './Notification'
 
 const BlogList = ({ blogs, user, notification }) => {
   return (
-    <div>
-      <h2>blogs</h2>
+    <div className='container'>
+    <article>
+      <h2 className='title'>blogs</h2>
       {notification && (
         <Notification
           status={notification.status}
@@ -12,7 +13,7 @@ const BlogList = ({ blogs, user, notification }) => {
         />
       )}
       {user && <p>{user.name} logged in</p>}
-      <ul>
+      <div className='content'><ul>
         {blogs.map((blog) => (
           <li className='blog-item' key={blog.id}>
             <Link to={`/blogs/${blog.id}`}>
@@ -20,7 +21,8 @@ const BlogList = ({ blogs, user, notification }) => {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul></div>
+    </article>
     </div>
   )
 }

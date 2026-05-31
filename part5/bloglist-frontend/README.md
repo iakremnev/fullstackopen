@@ -91,3 +91,7 @@ Rewrite playwright tests:
 * A logged-in user can create a blog
 * A logged-in user can like blogs
 * A logged-in user can delete their blog
+
+# Exercise 5.29-5.31
+
+Add styles to the application's forms and pages

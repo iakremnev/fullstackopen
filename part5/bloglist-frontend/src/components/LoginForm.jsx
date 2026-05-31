@@ -13,15 +13,17 @@ const LoginForm = ({ notification, handleLogin }) => {
   }
 
   return (
-    <div className='login-form'>
-      <h2>Login</h2>
+    <div className='container'>
+    <div className='login-form block box m-3'>
+      <h1 className='title'>Log in to blog app</h1>
       {notification && <Notification message={notification.message} status={notification.status}/>}
       <form type="submit" onSubmit={handleSubmit}>
-        <div>
-          <label>
-            username:
+        <div className="field">
+          <label className="label">
+            Username
             <input
               type="text"
+              className="input"
               value={username}
               onChange={(event) =>
                 setUsername(event.target.value)
@@ -29,11 +31,12 @@ const LoginForm = ({ notification, handleLogin }) => {
             />
           </label>
         </div>
-        <div>
-          <label>
-            password:
+        <div className="field">
+          <label className='label'>
+            Password
             <input
               type="password"
+              className='input'
               value={password}
               onChange={(event) =>
                 setPassword(event.target.value)
@@ -41,10 +44,11 @@ const LoginForm = ({ notification, handleLogin }) => {
             />
           </label>
         </div>
-        <div>
-          <button type="submit">Sign In</button>
+        <div className='field'>
+          <button className="button is-link" type="submit">Sign In</button>
         </div>
       </form>
+    </div>
     </div>
   )
 }

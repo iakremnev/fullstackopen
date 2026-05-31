@@ -1,5 +1,6 @@
 const Notification = ({ status, message }) => {
 
+  /*
   const notificationStyle = {
     color: status === 'error' ? 'red' : 'green',
     background: 'lightgrey',
@@ -8,9 +9,13 @@ const Notification = ({ status, message }) => {
     borderRadius: 5,
     padding: 10,
     marginBottom: 10
-  }
+  } */
 
-  return <div className={status} style={notificationStyle}>{message}</div>
+  const className = status === "success"
+    ? "notification is-success"
+    : "notification is-danger"
+
+  return <div className={className}>{message}</div>
 }
 
 export default Notification

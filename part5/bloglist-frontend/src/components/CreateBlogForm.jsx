@@ -14,23 +14,23 @@ const CreateBlogForm = ({ notification, handleCreateNewBlog }) => {
     // setUrl('')
   }
   return (
-    <div>
-      <h2>Create new blog</h2>
+    <div className='block box m-3'>
+      <h1 className='title is-2'>Create new blog</h1>
       {notification && <Notification message={notification.message} status={notification.status}/>}
       <form type="submit" onSubmit={handleSubmit}>
-        <label>
-                title:
-          <input type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
-        </label>
-        <label>
-                author:
-          <input type="text" value={author} onChange={(event) => setAuthor(event.target.value)}/>
-        </label>
-        <label>
-                url:
-          <input type="text" value={url} onChange={(event) => setUrl(event.target.value)}/>
-        </label>
-        <button type="submit">Create</button>
+        <div className='field'><label className='label'>
+                Title
+          <input type="text" className='input' value={title} onChange={(event) => setTitle(event.target.value)}/>
+        </label></div>
+        <div className='field'><label className='label'>
+                Author
+          <input type="text" className='input' value={author} onChange={(event) => setAuthor(event.target.value)}/>
+        </label></div>
+        <div className='field'><label className='label'>
+          URL
+          <input type="text" className='input' value={url} onChange={(event) => setUrl(event.target.value)}/>
+        </label></div>
+        <button type="submit" className='button is-link'>Create</button>
       </form>
     </div>
   )

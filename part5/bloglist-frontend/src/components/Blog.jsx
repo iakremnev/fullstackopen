@@ -21,24 +21,28 @@ const Blog = ({ blog, allowLike, allowDelete, handleLike, handleDelete }) => {
   }
   */
 
-  const showOnExpand = { display: expanded ? 'block' : 'none' }
-  const showOnExpandIfDeleteAllowed = { display: expanded && allowDelete ? 'block' : 'none' }
+  const showOnExpand = { display: expanded ? 'flex' : 'none', gap: 10 }
+  const showOnExpandIfDeleteAllowed = { display: expanded && allowDelete ? 'inline flow-root' : 'none' }
   const showOnExpandIfLikeAllowed = { display: expanded && allowLike ? 'inline flow-root' : 'none' }
 
   return (
-    <div className='blog'>
-      <h2>
-        <span>{blog.author}: </span>
-        <span>{blog.title}</span>
+    <div className='blog card has-background-dark'>
+      <div className="card-content">
+      <h2 className="title is-2">
+        {blog.title}
       </h2>
-      {/* <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>*/}
-      <div style={showOnExpand} className="blog-url">{blog.url}</div>
-      <div style={showOnExpand}>
-        likes {blog.likes}
-        <button style={showOnExpandIfLikeAllowed} onClick={handleLike}>like</button>
+      <div>
+        by {blog.author}
       </div>
-      <div style={showOnExpand}>{blog.user?.name}</div>
-      <div style={showOnExpandIfDeleteAllowed}><button onClick={handleDelete}>Remove</button></div>
+      {/* <button onClick={toggleExpanded}>{expanded ? 'Hide' : 'Show'}</button>*/}
+      <a style={showOnExpand} className="blog-url">{blog.url}</a>
+      <div style={showOnExpand}>Added by {blog.user?.name}</div>
+      <div style={showOnExpand} className="is-size-4">
+        {blog.likes} likes
+        <button style={showOnExpandIfLikeAllowed} className="button" onClick={handleLike}>like</button>
+        <button style={showOnExpandIfDeleteAllowed} onClick={handleDelete} className="button is-danger">Remove</button>
+      </div>
+    </div>
     </div>
   )
 }
