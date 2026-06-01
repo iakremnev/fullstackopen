@@ -11,9 +11,9 @@ const Notification = ({ status, message }) => {
     marginBottom: 10
   } */
 
-  const className = status === "success"
-    ? "notification is-success"
-    : "notification is-danger"
+  const className = status === 'success'
+    ? 'notification is-success'
+    : 'notification is-danger'
 
   return <div className={className}>{message}</div>
 }

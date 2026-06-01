@@ -44,7 +44,7 @@ describe('<Blog />', () => {
     const header = screen.getByText(`${blog.author}:`, {})
     const url = screen.getByText(blog.url)
     const likes = screen.getByText(`likes ${blog.likes}`)
-    const likeButton = screen.queryByText("like", { exact: true })
+    const likeButton = screen.queryByText('like', { exact: true })
     const deleteButton = screen.queryByText('Remove')
 
     expect(header).toBeVisible()
@@ -56,7 +56,7 @@ describe('<Blog />', () => {
 
   test('like button is only shown if allowed', async () => {
     render(<Blog blog={blog} allowLike/>)
-    const likeButton = screen.getByText("like", { exact: true })
+    const likeButton = screen.getByText('like', { exact: true })
     expect(likeButton).toBeVisible()
   })
 
