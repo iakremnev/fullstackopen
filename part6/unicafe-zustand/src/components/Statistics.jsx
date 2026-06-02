@@ -1,9 +1,9 @@
+import { useVotes } from "../store";
+
 const fmtPercent = (value) => `${value * 100}%`;
 
-const Statistics = ({ votes }) => {
-  const good = votes.good
-  const neutral = votes.neutral
-  const bad = votes.bad
+const Statistics = () => {
+  const { good, neutral, bad } = useVotes()
   const all = good + neutral + bad
   const average = (good - bad) / all
   const positive = fmtPercent(good / all)
