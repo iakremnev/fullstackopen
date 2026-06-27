@@ -33,3 +33,7 @@ Save likes to the server
 # Exercise 6.10
 
 Add notifications for adding new anecdote or voting for one
+
+# Exercise 6.11
+
+Allow deleting anecdotes with zero votes

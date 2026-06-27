@@ -1,6 +1,7 @@
 
 import { create } from 'zustand'
 import anecdoteService from '../services/anecdotes'
+import anecdotes from '../services/anecdotes'
 
 const sortAnecdotes = (anecdotes) => anecdotes.toSorted((left, right) => right.votes - left.votes)
 
@@ -22,6 +23,11 @@ const useAnecdoteStore = create((set, get) => ({
     add: async (anecdoteText) => {
       const anecdote = await anecdoteService.create(anecdoteText)
       set((state) => ({ anecdotes: state.anecdotes.concat(anecdote) }))
+    },
+    remove: async (id) => {
+      await anecdoteService.remove(id)
+      const updated = get().anecdotes.filter(item => item.id !== id)
+      set(() => ({ anecdotes: sortAnecdotes(updated) }))
     },
     setFilter: (filterText) => set(() => ({ filter: filterText })),
     initialize: async () => {

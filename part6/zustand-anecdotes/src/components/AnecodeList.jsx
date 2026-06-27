@@ -3,12 +3,17 @@ import { useNotificationActions } from '../stores/notifications'
 
 const AnecodeList = () => {
   const anecdotes = useAnecdotes()
-  const { vote } = useAnecdoteActions()
+  const { vote, remove } = useAnecdoteActions()
   const { setInfo } = useNotificationActions()
 
   const handleVoteFor = (anecdote) => (async () => {
     await vote(anecdote.id)
     setInfo(`You voted for ${anecdote.content}`)
+  })
+
+  const handleDeleteFor = (anecdote) => (async () => {
+    await remove(anecdote.id)
+    setInfo(`You deleted anecdote ${anecdote.content}`)
   })
 
   return (
@@ -20,6 +25,9 @@ const AnecodeList = () => {
           <div>
             has {anecdote.votes}
             <button onClick={ handleVoteFor(anecdote) }>vote</button>
+            {anecdote.votes === 0 &&
+              <button onClick={ handleDeleteFor(anecdote) }>delete</button>
+            }
           </div>
         </div>
       ))}
