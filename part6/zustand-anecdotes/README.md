@@ -13,3 +13,7 @@ Extract code into *AnecdoteForm* and *AnecdoteList*. Use the store.
 # Exercise 6.5
 
 Show the anecodotes in the list sorted by the number of votes
+
+# Exercise 6.6
+
+Add filter to anecdotes
