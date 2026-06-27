@@ -32,4 +32,20 @@ const create = async (anecdoteText) => {
   return anecdote
 }
 
-export default { getAll, create }
+const update = async (id, anecdote) => {
+  const response = await fetch(baseUrl + `/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(anecdote)
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to update an anecdote')
+  }
+
+  return anecdote
+}
+
+export default { getAll, create, update }

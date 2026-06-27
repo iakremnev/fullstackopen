@@ -25,3 +25,7 @@ Fetch anecdotes from the JSON server backend.
 # Exercise 6.8
 
 Store new anecdotes to the server
+
+# Exercise 6.9
+
+Save likes to the server
