@@ -22,7 +22,9 @@ const useAnecdoteStore = create((set) => ({
   anecdotes: anecdotesAtStart.map(asObject),
   actions: {
     vote: (id) => set(state => ({
-      anecdotes: state.anecdotes.map(item => item.id === id ? { ...item, votes: item.votes + 1 } : item)
+      anecdotes: state.anecdotes
+        .map(item => item.id === id ? { ...item, votes: item.votes + 1 } : item)
+        .toSorted((left, right) => right.votes - left.votes)
     })),
     add: (anecdoteText) => set(state => ({anecdotes: state.anecdotes.concat(asObject(anecdoteText))}))
   },
