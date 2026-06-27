@@ -5,3 +5,7 @@ Implement voting functionality through a store
 # Exercise 6.3
 
 Add the ability to add new anecdotes
+
+# Exercise 6.4
+
+Extract code into *AnecdoteForm* and *AnecdoteList*. Use the store.
