@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecodeList from './components/AnecodeList'
 import Filter from './components/Filter'
-import { useAnecdoteActions } from './store'
+import Notification from './components/Notification'
+import { useAnecdoteActions } from './stores/anecdotes'
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <div>
       <Filter />
+      <Notification />
       <AnecodeList />
       <AnecdoteForm />
     </div>

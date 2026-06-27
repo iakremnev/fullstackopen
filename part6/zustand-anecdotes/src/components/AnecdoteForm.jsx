@@ -1,12 +1,16 @@
-import { useAnecdoteActions } from "../store"
+import { useAnecdoteActions } from "../stores/anecdotes"
+import { useNotificationActions } from "../stores/notifications"
 
 const AnecdoteForm = () => {
 
   const { add } = useAnecdoteActions()
+  const { setInfo } = useNotificationActions()
 
-  const handleAddAnecdote = (event) => {
+  const handleAddAnecdote = async (event) => {
     event.preventDefault()
-    add(event.target.anecdote.value)
+    const anecdote = event.target.anecdote.value
+    await add(anecdote)
+    setInfo(`Added new anecdote: ${anecdote}`)
     event.target.reset()
   }
 

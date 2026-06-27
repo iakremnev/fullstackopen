@@ -1,6 +1,6 @@
 
 import { create } from 'zustand'
-import anecdoteService from './services/anecdotes'
+import anecdoteService from '../services/anecdotes'
 
 const sortAnecdotes = (anecdotes) => anecdotes.toSorted((left, right) => right.votes - left.votes)
 

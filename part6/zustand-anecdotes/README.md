@@ -29,3 +29,7 @@ Store new anecdotes to the server
 # Exercise 6.9
 
 Save likes to the server
+
+# Exercise 6.10
+
+Add notifications for adding new anecdote or voting for one
