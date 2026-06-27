@@ -17,3 +17,7 @@ Show the anecodotes in the list sorted by the number of votes
 # Exercise 6.6
 
 Add filter to anecdotes
+
+# Exercise 6.7
+
+Fetch anecdotes from the JSON server backend.
