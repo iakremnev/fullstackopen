@@ -1,7 +1,6 @@
 
 import { create } from 'zustand'
 import anecdoteService from '../services/anecdotes'
-import anecdotes from '../services/anecdotes'
 
 const sortAnecdotes = (anecdotes) => anecdotes.toSorted((left, right) => right.votes - left.votes)
 
@@ -43,3 +42,5 @@ export const useAnecdotes = () => {
   return anecdotes.filter(item => item.content.includes(filter))
 }
 export const useAnecdoteActions = () => useAnecdoteStore((state) => state.actions)
+
+export default useAnecdoteStore

@@ -37,3 +37,11 @@ Add notifications for adding new anecdote or voting for one
 # Exercise 6.11
 
 Allow deleting anecdotes with zero votes
+
+# Exercise 6.12
+
+Test that the anecdotes are initialized with the state from the server
+
+# Exercise 6.13
+
+Test that the anecdotes are returned from the store in a sorted order
