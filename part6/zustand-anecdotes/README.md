@@ -45,3 +45,11 @@ Test that the anecdotes are initialized with the state from the server
 # Exercise 6.13
 
 Test that the anecdotes are returned from the store in a sorted order
+
+# Exercise 6.14
+
+Test that the anecdotes are properly filtered
+
+# Exercise 6.15
+
+Test that voting increases number of votes for an anecdote
