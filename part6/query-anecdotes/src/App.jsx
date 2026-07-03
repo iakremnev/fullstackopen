@@ -8,16 +8,17 @@ const App = () => {
     console.log('vote')
   }
 
-  const anecdotes = useQuery({
+  const anecdotesQuery = useQuery({
     queryKey: ['anecdotes'],
-    queryFn: anecdoteService.getAll
+    queryFn: anecdoteService.getAll,
+    refetchOnWindowFocus: false
   })
 
-  if (anecdotes.isPending) {
+  if (anecdotesQuery.isPending) {
     return <div>fetching data...</div>
   }
 
-  if (anecdotes.isError) {
+  if (anecdotesQuery.isError) {
     return <div>Couldn't fetch anecdotes due to server error</div>
   }
 
@@ -28,7 +29,7 @@ const App = () => {
       <Notification />
       <AnecdoteForm />
 
-      {anecdotes.data.map((anecdote) => (
+      {anecdotesQuery.data.map((anecdote) => (
         <div key={anecdote.id}>
           <div>{anecdote.content}</div>
           <div>
