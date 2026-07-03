@@ -13,13 +13,17 @@ const create = async (anecdote) => {
     votes: 0,
     id: getId()
   }
-  await fetch(baseUrl, {
+  const response = await fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json'
     },
     body: JSON.stringify(anecdoteObj)
   })
+  if (!response.ok) {
+    const error = (await response.json()).error
+    throw new Error(`Failed to create an anecdote: ${error}`)
+  }
   return anecdoteObj
 }
 
@@ -31,7 +35,7 @@ const update = async (id, anecdote) => {
     },
     body: JSON.stringify(anecdote)
   })
-  return response.json()
+  return await response.json()
 }
 
 export default { getAll, create, update }
