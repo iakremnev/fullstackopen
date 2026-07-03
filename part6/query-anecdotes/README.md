@@ -13,3 +13,7 @@ Implement voting for an anecdote
 # Exercise 6.19
 
 Extract queries to a custom hook
+
+# Exercise 6.20
+
+Implement notification with Context API. Notify about voting for an anecdote
