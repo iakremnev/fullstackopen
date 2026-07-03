@@ -9,3 +9,7 @@ Implement adding anecdote to the server.
 # Exercise 6.18
 
 Implement voting for an anecdote
+
+# Exercise 6.19
+
+Extract queries to a custom hook
