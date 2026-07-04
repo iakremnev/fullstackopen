@@ -9,3 +9,7 @@ Add a button that clears all input fields. Add reset function to the `useField` 
 # Exercise 7.3
 
 Fix spreading warning after added reset function
+
+# Exercise 7.4
+
+Add `useAnecdotes` hook. It should fetch all anecdotes from the server
