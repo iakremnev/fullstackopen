@@ -17,3 +17,7 @@ Add `useAnecdotes` hook. It should fetch all anecdotes from the server
 # Exercise 7.5
 
 `useAnecdotes` must support adding a new anecdote
+
+# Exercise 7.6
+
+Support deleting an anecdote. Don't pass the `useAnecdotes` controls as props to the components
