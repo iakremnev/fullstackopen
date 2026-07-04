@@ -13,3 +13,7 @@ Fix spreading warning after added reset function
 # Exercise 7.4
 
 Add `useAnecdotes` hook. It should fetch all anecdotes from the server
+
+# Exercise 7.5
+
+`useAnecdotes` must support adding a new anecdote
